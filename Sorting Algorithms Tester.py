@@ -62,6 +62,30 @@ def selection(data):
         data.remove(min)
     return newdata
 
+def quicksort(data):
+    if len(data)>1:
+        time=0
+        i=-1
+        j=0
+        pivot=len(data)-1
+        for _ in range(len(data)):
+            if data[j]<pivot:
+                i+=1
+                temp=data[i]
+                data[i]=data[j]
+                data[j]=temp
+            j+=1
+            if j==pivot:
+                i+=1
+                temp=data[i]
+                data[i]=data[j]
+                data[j]=temp
+                data=quicksort(data.copy()[:i])[0]+[data[i]]+quicksort(data.copy()[i+1:])[0]
+                break
+        return (data,time)
+    else:
+        return (data,0)
+print(quicksort([723,541,746,163,964,163,498,274,976,275,959]))
 
 def fancynum(num):
     if num==1:
