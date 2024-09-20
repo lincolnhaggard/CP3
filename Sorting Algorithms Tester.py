@@ -127,7 +127,11 @@ def bingo(data):
             elif data[i]<bingo:
                 bingo=data[i]
         min=bingo
-        bingo=max    
+        bingo=max
+        
+
+    
+        
     return data
 
 def combsort(data):
