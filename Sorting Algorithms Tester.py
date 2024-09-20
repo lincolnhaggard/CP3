@@ -1,11 +1,8 @@
 import random
 import time as t
 """
-bubble
-insertion
-selection
-quicksort
 heapsort
+
 mergesort
 countingsort
 radixsort
@@ -62,7 +59,7 @@ def selection(data):
         data.remove(min)
     return newdata
 
-def quicksort(data):
+def quick(data):
     if len(data)>1:
         time=0
         i=-1
@@ -80,12 +77,36 @@ def quicksort(data):
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
-                data=quicksort(data.copy()[:i])[0]+[data[i]]+quicksort(data.copy()[i+1:])[0]
+                data=quick(data.copy()[:i])[0]+[data[i]]+quick(data.copy()[i+1:])[0]
                 break
         return (data,time)
     else:
         return (data,0)
-print(quicksort([723,541,746,163,964,163,498,274,976,275,959]))
+def merge(data):
+    if len(data)<=1:
+        return data
+    left=merge(data[:len(data)//2])
+    right=merge(data[len(data)//2:])
+
+
+    newdata = []
+    i = 0
+    j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            newdata.append(left[i])
+            i += 1
+        else:
+            newdata.append(right[j])
+            j += 1
+
+    newdata=newdata+left[i:]
+    newdata=newdata+right[j:]
+    return newdata
+
+
+
 
 def fancynum(num):
     if num==1:
