@@ -7,7 +7,6 @@ radixsort
 bucketsort
 
 
-bingosort
 shellsort
 timsort
 combsort
@@ -125,13 +124,30 @@ def bingo(data):
                 data[i]=data[j]
                 data[j]=temp
                 j+=1
+            elif data[i]<bingo:
+                bingo=data[i]
+        min=bingo
+        bingo=max    
+    return data
+
+def combsort(data):
+    gap=len(data)//1.3
+    done=False
+    while not done:
+        done=True
+        for i in range(len(data)):
+            if i+int(gap)<len(data):
+                if data[i]>data[i+int(gap)]:
+                    temp=data[i]
+                    data[i]=data[i+int(gap)]
+                    data[i+int(gap)]=temp
+                    done=False
+        if gap!=1:
+            gap=gap//1.3
+            print(gap)
+            done=False
         
-
-    
-        
-    return newdata
-
-
+    return data
 
 def fancynum(num):
     if num==1:
