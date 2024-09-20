@@ -23,8 +23,17 @@ bitonicsort
 #Functions
 
 def bubble(data):
-    #Something
     time=0
+    done=False
+    while not done:
+        done=True
+        for i in range(len(data)-1):
+            if data[i]>data[i+1]:
+                temp=data[i]
+                data[i]=data[i+1]
+                data[i+1]=temp
+                done=False
+                time+=1
     return (data,time)
 
 def fancynum(num):
@@ -65,6 +74,9 @@ else:
 
 
 if sort=="bubble" or sort=="bubblesort" or sort=="bubble sort":
-    bubble(data)
+    output=bubble(data)
+
+print(output[0])
+print(output[1])
 
 
