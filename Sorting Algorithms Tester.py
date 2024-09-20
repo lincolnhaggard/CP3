@@ -1,5 +1,5 @@
 import random
-
+import time as t
 """
 bubble
 insertion
@@ -24,17 +24,34 @@ bitonicsort
 
 def bubble(data):
     time=0
+    #done is only complete when no swaps have been made
     done=False
     while not done:
         done=True
         for i in range(len(data)-1):
+            #checks if needs to be swapped
             if data[i]>data[i+1]:
+                #swaps
                 temp=data[i]
                 data[i]=data[i+1]
                 data[i+1]=temp
                 done=False
                 time+=1
     return (data,time)
+
+def insertion(data):
+    time=0
+    
+    for i in range(1,len(data)):
+        var=data[i]
+        k=i-1
+        while k>=0 and data[k]>var:
+            data[k+1]=data[k]
+            k-=1
+        data[k+1]=var
+    return data
+
+
 
 def fancynum(num):
     if num==1:
