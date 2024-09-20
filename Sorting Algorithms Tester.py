@@ -32,9 +32,7 @@ def bubble(data):
             #checks if needs to be swapped
             if data[i]>data[i+1]:
                 #swaps
-                temp=data[i]
-                data[i]=data[i+1]
-                data[i+1]=temp
+                (data[i],data[i+1])=(data[i+1],data[i])
                 done=False
                 time+=1
     return (data,time)
@@ -51,6 +49,18 @@ def insertion(data):
         data[k+1]=var
     return data
 
+def selection(data):
+    time=0
+    newdata=[]
+    for i in range(len(data)):
+        min=data[0]
+        for k in range(len(data)):
+
+            if data[k]<min:
+                min=data[k]
+        newdata.append(min)
+        data.remove(min)
+    return newdata
 
 
 def fancynum(num):
