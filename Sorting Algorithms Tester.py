@@ -2,11 +2,11 @@ import random
 import time as t
 """
 heapsort
-
-mergesort
 countingsort
 radixsort
 bucketsort
+
+
 bingosort
 shellsort
 timsort
@@ -105,6 +105,31 @@ def merge(data):
     newdata=newdata+right[j:]
     return newdata
 
+def bingo(data):
+    time=0
+    newdata=[]
+    min=data[0]
+    max=data[0]
+    
+    for k in range(len(data)):
+        if data[k]>max:
+            max=data[k]
+        if data[k]<min:
+            min=data[k]
+    bingo=max
+    j=0
+    while min<bingo:
+        for i in range(j,len(data)):
+            if data[i]==min:
+                temp=data[i]
+                data[i]=data[j]
+                data[j]=temp
+                j+=1
+        
+
+    
+        
+    return newdata
 
 
 
