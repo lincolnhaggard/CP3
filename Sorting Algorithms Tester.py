@@ -69,7 +69,7 @@ def quicksort(data):
         j=0
         pivot=len(data)-1
         for _ in range(len(data)):
-            if data[j]<pivot:
+            if data[j]<data[pivot]:
                 i+=1
                 temp=data[i]
                 data[i]=data[j]
