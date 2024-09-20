@@ -125,11 +125,15 @@ def bingo(data):
                 data[i]=data[j]
                 data[j]=temp
                 j+=1
+            elif data[i]<bingo:
+                bingo=data[i]
+        min=bingo
+        bingo=max
         
 
     
         
-    return newdata
+    return data
 
 
 
