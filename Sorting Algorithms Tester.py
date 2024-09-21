@@ -1,7 +1,27 @@
 import random
 import time as t
 """
-heapsort
+\|bubble
+\|Insertion
+\|Selection
+\|quick
+O|Heap
+\|Merge
+\|Counting
+O|Radix
+O|Bucket
+\|Bingo
+O|Shell
+O|Tim
+\|Comb
+O|pigeonhole
+O|Cycle
+O|Cocktail
+O|Strand
+O|Bitonic
+
+
+
 countingsort
 radixsort
 bucketsort
@@ -9,7 +29,7 @@ bucketsort
 
 shellsort
 timsort
-combsort
+
 pigeonholesort
 cyclesort
 cocktailsort
@@ -104,6 +124,49 @@ def merge(data):
     newdata=newdata+right[j:]
     return newdata
 
+def counting(data):
+    max=data[0]
+    newdata=[0]*len(data)
+    for k in range(len(data)):
+        if data[k]>max:
+            max=data[k]
+    count=[0]*(max+1)
+    for i in data:
+        count[i]+=1
+    for i in range(1,max+1):
+        count[i]+=count[i-1]
+    for i in range(len(data)):
+        newdata[count[data[i]]-1]=data[i]
+        count[data[i]]-=1
+
+    return newdata
+
+def radix(data):
+    max=data[0]
+    for k in range(len(data)):
+        if data[k]>max:
+            max=data[k]
+    exp=1
+    while max/exp>=1:
+        n = len(data)
+        newdata=[0]*(n)
+        count=[0]*(10)
+        for i in range(0,n):
+            count[(data[i]//exp)%10]+=1
+        for i in range(1, 10):
+            count[i]+=count[i-1]
+        i=n-1
+        while i>=0:
+            newdata[count[(data[i]//exp)%10]-1]=data[i]
+            count[(data[i]//exp)%10]-=1
+            i-=1
+        i=0
+        for i in range(0,len(data)):
+            data[i]=newdata[i]
+        exp*=10
+    return data
+
+print(radix([4,6,324,564,235,86573,46,546,3]))
 def bingo(data):
     time=0
     newdata=[]
@@ -134,7 +197,7 @@ def bingo(data):
         
     return data
 
-def combsort(data):
+def comb(data):
     gap=len(data)//1.3
     done=False
     while not done:
