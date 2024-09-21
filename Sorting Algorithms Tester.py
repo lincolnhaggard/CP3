@@ -8,7 +8,7 @@ import time as t
 O|Heap
 \|Merge
 \|Counting
-O|Radix
+\|Radix
 O|Bucket
 \|Bingo
 O|Shell
@@ -166,7 +166,6 @@ def radix(data):
         exp*=10
     return data
 
-print(radix([4,6,324,564,235,86573,46,546,3]))
 def bingo(data):
     time=0
     newdata=[]
@@ -191,11 +190,29 @@ def bingo(data):
                 bingo=data[i]
         min=bingo
         bingo=max
-        
-
-    
-        
+            
     return data
+
+def shell(data):
+    gap=len(data)//2
+    while gap>0:
+        gap2=gap
+        while gap2<len(data):
+            gap3=gap2-gap
+            while gap3>=0:
+                if data[gap3+gap]>data[gap3]:
+                    break
+                else:
+                    temp=data[gap3+gap]
+                    data[gap3+gap]=data[gap3]
+                    data[gap3]=temp
+                gap3-=gap
+            gap2+=1
+        gap=gap//2
+    return data
+
+
+
 
 def comb(data):
     gap=len(data)//1.3
