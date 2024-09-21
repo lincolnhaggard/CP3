@@ -12,7 +12,7 @@ O|Heap
 O|Bucket
 \|Bingo
 \|Shell
-O|Tim
+\|Tim
 \|Comb
 O|pigeonhole
 O|Cycle
@@ -267,6 +267,25 @@ def comb(data):
             done=False
         
     return data
+
+def pigeonhole(data):
+    min=data[0]
+    max=data[0]
+    
+    for k in range(len(data)):
+        if data[k]>max:
+            max=data[k]
+        if data[k]<min:
+            min=data[k]
+    holes=[0]*(max-min+1)
+    for i in data:
+        print(i-min)
+        holes[i-min]+=1
+    newdata=[]
+    for i in range(len(holes)):
+        newdata+=[i+min]*holes[i]
+    return newdata
+
 
 def fancynum(num):
     if num==1:
