@@ -1,20 +1,20 @@
 import random
 import time as t
 """
-\|bubble
-\|Insertion
-\|Selection
-\|quick
+/|bubble
+/|Insertion
+/|Selection
+/|quick
 O|Heap
-\|Merge
-\|Counting
-\|Radix
+/|Merge
+/|Counting
+/|Radix
 O|Bucket
-\|Bingo
-\|Shell
-\|Tim
-\|Comb
-O|pigeonhole
+/|Bingo
+/|Shell
+/|Tim
+/|Comb
+/|pigeonhole
 O|Cycle
 O|Cocktail
 O|Strand
@@ -285,6 +285,24 @@ def pigeonhole(data):
     for i in range(len(holes)):
         newdata+=[i+min]*holes[i]
     return newdata
+
+def cocktail(data):
+    time=0
+    done=False
+    while not done:
+        done=True
+        for i in range(len(data)-1):
+            if data[i]>data[i+1]:
+                (data[i],data[i+1])=(data[i+1],data[i])
+                done=False
+                time+=1
+        for i in range(len(data)-1,0,-1):
+            if data[i]<data[i-1]:
+                (data[i],data[i-1])=(data[i-1],data[i])
+                done=False
+                time+=1
+    return (data,time)
+
 
 
 def fancynum(num):
