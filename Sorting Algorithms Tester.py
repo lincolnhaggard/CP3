@@ -140,6 +140,29 @@ def quick(data,show):
         return data
     else:
         return data
+def quickt(data):
+    if len(data)>1:
+        time=0
+        i=-1
+        j=0
+        pivot=len(data)-1
+        for _ in range(len(data)):
+            if data[j]<data[pivot]:
+                i+=1
+                temp=data[i]
+                data[i]=data[j]
+                data[j]=temp
+            j+=1
+            if j==pivot:
+                i+=1
+                temp=data[i]
+                data[i]=data[j]
+                data[j]=temp
+                data=quickt(data.copy()[:i])+[data[i]]+quickt(data.copy()[i+1:])
+                break
+        return data
+    else:
+        return data
 def merge(data):
     if len(data)<=1:
         return data
@@ -377,31 +400,40 @@ if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter
     done=False
     while not done:
         try:
-            varnum=int(input("How many values would you like in your data: "))
+            data=[]
+            datainput=input("Please enter your data(Ex: 4,5,3,1,1):\n")
+            temp=""
+            print(datainput)
+            for i in str(datainput):
+                if i!=",":
+                    temp+=i
+                else:
+                    data.append(int(temp))
+                    temp=""
+            data.append(int(temp))
             done=True
         except:
             print("Something went wrong try again")
-    data=[]
 
 
-    for i in range(varnum):
-        done=False
-        while not done:
-            try:
-                data.append(int(input(f"Enter the {fancynum(i+1)} value: ")))
-                done=True
-            except:
-                print("Something went wrong try again")
+    
 else:
-    data=[]
-    for i in range(random.randint(5,50)):
-        data.append(random.randint(0,50))
+    done=False
+    while not done:
+        try:
+            data=[]
+            for i in range(int(input("How many numbers would you like"))):
+                data.append(random.randint(0,999))
+            done=True
+        except:
+            print("Something went wrong try again")
 
 show=input("Would you like to be shown step by step?: ").lower()
 if show=="yes":
     show=True
 if show=="no":
     show=False
+    print(data)
 if sort=="bubble" or sort=="bubblesort" or sort=="bubble sort":
     output=bubble(data,show)
     time=timeit.timeit(lambda:bubble(data,False))
@@ -413,7 +445,7 @@ if sort=="selection" or sort=="selectionsort" or sort=="selection sort":
     time=timeit.timeit(lambda:selection(data,False))
 if sort=="quick" or sort=="quicksort" or sort=="quick sort":
     output=quick(data,show)
-    time=timeit.timeit(lambda:quick(data,False))
+    time=timeit.timeit(lambda:quickt(data))
 
 print(output)
 print(f"Time: {round(time,4)} Seconds")
