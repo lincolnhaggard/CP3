@@ -97,22 +97,49 @@ def quick(data,show):
         j=0
         pivot=len(data)-1
         for _ in range(len(data)):
+            if show:
+                print(data)
+                print(f"pointer 1: {i}")
+                t.sleep(0.3)
+                print(f"pointer 2: {j}")
+                t.sleep(0.3)
+                print(f"Is {data[j]} less than"+f" {data[pivot]}")
+                t.sleep(0.3)
             if data[j]<data[pivot]:
+                if show:
+                    print("Yes, incremeant pointer 1 by 1 and swap")
+                    t.sleep(0.3)
                 i+=1
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
+            if show:
+                print("Increament pointer 2 by 1")
+                t.sleep(0.3)
             j+=1
+            if show:
+                print("Is pointer 2 at the piviot?")
+                t.sleep(0.3)
             if j==pivot:
                 i+=1
+                if show:
+                    print("Yes, increament pointer 1 by 1")
+                    t.sleep(0.3)
+                    print("Swap the number at pointer 1 and the piviot")
+                    t.sleep(0.3)
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
-                data=quick(data.copy()[:i],show)[0]+[data[i]]+quick(data.copy()[i+1:],show)[0]
+                if show:
+                    print("Split the list around the piviot and repeat")
+                    t.sleep(0.3)
+                data=quick(data.copy()[:i],show)+[data[i]]+quick(data.copy()[i+1:],show)
+                if show:
+                    print("combine back together")
                 break
         return data
     else:
-        return (data,0)
+        return data
 def merge(data):
     if len(data)<=1:
         return data
@@ -343,7 +370,7 @@ def fancynum(num):
         return str(num)+"th"
 
 
-print("Bubble\nInsertion\nSelection")
+print("Bubble\nInsertion\nSelection\nQuick")
 sort=input("What sorting algorithm would you like to use?: ").lower()
 datatyp=input("Whould you like to input your own data?(otherwise a random set will be generated): ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter":
@@ -384,6 +411,9 @@ if sort=="insertion" or sort=="insertionsort" or sort=="insertion sort":
 if sort=="selection" or sort=="selectionsort" or sort=="selection sort":
     output=selection(data,show)
     time=timeit.timeit(lambda:selection(data,False))
+if sort=="quick" or sort=="quicksort" or sort=="quick sort":
+    output=quick(data,show)
+    time=timeit.timeit(lambda:quick(data,False))
 
 print(output)
 print(f"Time: {round(time,4)} Seconds")
