@@ -47,7 +47,8 @@ def bubble(data,show):
                 
                 done=False
                 time+=1
-    return (data,time)
+    return data
+
 
 def insertion(data):
     time=0
@@ -94,7 +95,7 @@ def quick(data):
                 data[j]=temp
                 data=quick(data.copy()[:i])[0]+[data[i]]+quick(data.copy()[i+1:])[0]
                 break
-        return (data,time)
+        return data
     else:
         return (data,0)
 def merge(data):
@@ -358,15 +359,19 @@ show=input("Would you like to be shown step by step?: ").lower()
 if show=="yes":
     show=True
 if show=="no":
-    show==False
+    show=False
 if sort=="bubble" or sort=="bubblesort" or sort=="bubble sort":
     output=bubble(data,show)
+    time=timeit.timeit(lambda:bubble(data,False))
 if sort=="insertion" or sort=="insertionsort" or sort=="insertion sort":
     output=insertion(data,show)
+    time=timeit.timeit(lambda:insertion(data,False))
 if sort=="selection" or sort=="selectionsort" or sort=="selection sort":
-    output=insertion(data,show)
+    output=selection(data,show)
+    time=timeit.timeit(lambda:selection(data,False))
 
-print(output[0])
-print(output[1])
+print(output)
+print(f"Time: {round(time,4)} Seconds")
+
 
 
