@@ -50,32 +50,47 @@ def bubble(data,show):
     return data
 
 
-def insertion(data):
+def insertion(data,show):
     time=0
     
     for i in range(1,len(data)):
         var=data[i]
+        if show:
+            print(data)
+            print(f"Inserting {var}")
+            t.sleep(0.3)
         k=i-1
         while k>=0 and data[k]>var:
             data[k+1]=data[k]
             k-=1
         data[k+1]=var
+        if show:
+            print(str(var)+f" goes in the {k+1}s slot")
+            t.sleep(0.3)
     return data
 
-def selection(data):
+def selection(data,show):
     time=0
     newdata=[]
+    if show:
+        print(data)
     for i in range(len(data)):
         min=data[0]
         for k in range(len(data)):
 
             if data[k]<min:
                 min=data[k]
+        if show:
+            print(f"The min is {min}")
+            t.sleep(0.3)
         newdata.append(min)
+        if show:
+            print(newdata)
+            t.sleep(0.3)
         data.remove(min)
     return newdata
 
-def quick(data):
+def quick(data,show):
     if len(data)>1:
         time=0
         i=-1
@@ -93,7 +108,7 @@ def quick(data):
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
-                data=quick(data.copy()[:i])[0]+[data[i]]+quick(data.copy()[i+1:])[0]
+                data=quick(data.copy()[:i],show)[0]+[data[i]]+quick(data.copy()[i+1:],show)[0]
                 break
         return data
     else:
