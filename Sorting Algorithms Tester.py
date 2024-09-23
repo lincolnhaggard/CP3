@@ -1,5 +1,6 @@
 import random
 import time as t
+import timeit
 """
 /|bubble
 /|Insertion
@@ -12,18 +13,18 @@ O|Heap
 O|Bucket
 /|Bingo
 /|Shell
-/|Tim
+//|Tim
 /|Comb
 /|pigeonhole
 O|Cycle
-O|Cocktail
+/|Cocktail
 O|Strand
 O|Bitonic
 
 """
 #Functions
 
-def bubble(data):
+def bubble(data,show):
     time=0
     #done is only complete when no swaps have been made
     done=False
@@ -31,9 +32,19 @@ def bubble(data):
         done=True
         for i in range(len(data)-1):
             #checks if needs to be swapped
+            if show:
+                print(data)
+                t.sleep(0.3)
+                print("Swap "+str(data[i])+" and "+str(data[i+1])+" if "+str(data[i])+" is greater than "+str(data[i+1]))
+                t.sleep(0.3)
+                print(str(data[i])+">"+str(data[i+1])+"="+str(data[i]>data[i+1]))
+                t.sleep(0.3)
             if data[i]>data[i+1]:
-                #swaps
+                if show:
+                    print("Swaped "+str(data[i])+" and "+str(data[i+1]))
+                    t.sleep(0.3)
                 (data[i],data[i+1])=(data[i+1],data[i])
+                
                 done=False
                 time+=1
     return (data,time)
@@ -315,6 +326,8 @@ def fancynum(num):
     else:
         return str(num)+"th"
 
+
+print("Bubble\nInsertion\nSelection")
 sort=input("What sorting algorithm would you like to use?: ").lower()
 datatyp=input("Whould you like to input your own data?(otherwise a random set will be generated): ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter":
@@ -341,9 +354,17 @@ else:
     for i in range(random.randint(5,50)):
         data.append(random.randint(0,50))
 
-
+show=input("Would you like to be shown step by step?: ").lower()
+if show=="yes":
+    show=True
+if show=="no":
+    show==False
 if sort=="bubble" or sort=="bubblesort" or sort=="bubble sort":
-    output=bubble(data)
+    output=bubble(data,show)
+if sort=="insertion" or sort=="insertionsort" or sort=="insertion sort":
+    output=insertion(data,show)
+if sort=="selection" or sort=="selectionsort" or sort=="selection sort":
+    output=insertion(data,show)
 
 print(output[0])
 print(output[1])
