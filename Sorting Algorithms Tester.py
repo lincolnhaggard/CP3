@@ -422,7 +422,7 @@ else:
     while not done:
         try:
             data=[]
-            for i in range(int(input("How many numbers would you like"))):
+            for i in range(int(input("How many numbers would you like: "))):
                 data.append(random.randint(0,999))
             done=True
         except:
