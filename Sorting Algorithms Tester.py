@@ -445,8 +445,10 @@ if sort=="selection" or sort=="selectionsort" or sort=="selection sort":
     time=timeit.timeit(lambda:selection(data,False))
 if sort=="quick" or sort=="quicksort" or sort=="quick sort":
     output=quick(data,show)
-    time=timeit.timeit(lambda:quickt(data))
-
+    time1=t.perf_counter()
+    output=quick(data,False)
+    time2=t.perf_counter()
+    print(time1,time2)
 print(output)
 print(f"Time: {round(time,4)} Seconds")
 
