@@ -321,8 +321,17 @@ def bingo(data,show):
     bingo=max
     j=0
     while min<bingo:
-        print(f"Whie min<bingo go through the data starting at the j({j})'s place")
+        if show:
+            print(f"Whie min<bingo go through the data starting at the j({j})'s place")
+            t.sleep(1)
         for i in range(j,len(data)):
+            if show:
+                print(f"If the data at the {i}s place is equal to the min swap it with the data at the "+f"{j}'s place then increament j by 1")
+                t.sleep(1)
+                print("Otherwise if data at the {i}s place is less than the bingo, bingo equals the data")
+                t.sleep(1)
+                print(f"data: {data[i]}",f"min: {min}",f"bingo: {bingo}")
+                t.sleep(1)
             if data[i]==min:
                 temp=data[i]
                 data[i]=data[j]
@@ -330,26 +339,65 @@ def bingo(data,show):
                 j+=1
             elif data[i]<bingo:
                 bingo=data[i]
+        if show:
+            print("set the min to the bingo and the bingo to the max")
+            t.sleep(1)
         min=bingo
         bingo=max
             
     return data
 
 def shell(data,show):
+    if show:
+        print("Set the gap to half the length of the data")
+        t.sleep(1)
+        print("repeate the next until the gap is 0 less than 0")
+        t.sleep(1)
     gap=len(data)//2
+
     while gap>0:
+        if show:
+            print("Set the gap2 to gap")
+            t.sleep(1)
+            print("repeate the next until gap2 is greater than the length of the data")
+            t.sleep(1)
         gap2=gap
         while gap2<len(data):
+            if show:
+                print("Set the gap3 to gap2-gap")
+                t.sleep(1)
+                print("repeate the next until gap3 is less than or equal too 0")
+                t.sleep(1)
             gap3=gap2-gap
             while gap3>=0:
+                if show:
+                    print(f"if the data at the gap3+gap({gap3+gap}) slot"+f" is greater than the data at gap3({gap3}) slot, stop repeating")
+                    t.sleep(1)
+                    print("Otherwise swap them")
+                    t.sleep(1)
                 if data[gap3+gap]>data[gap3]:
+                    if show:
+                        print("stopped repeating")
+                        t.sleep(1)
                     break
                 else:
+                    if show:
+                        print("Swapped")
+                        t.sleep(1)
                     temp=data[gap3+gap]
                     data[gap3+gap]=data[gap3]
                     data[gap3]=temp
+                if show:
+                    print(f"subtract gap({gap})"+f" from gap3({gap3})")
+                    t.sleep(1)
                 gap3-=gap
+            if show:
+                print(f"add 1 to gap2({gap2})")
+                t.sleep(1)
             gap2+=1
+        if show:
+            print(f"Divide gap({gap}) by two and round down")
+            t.sleep(1)
         gap=gap//2
     return data
 
