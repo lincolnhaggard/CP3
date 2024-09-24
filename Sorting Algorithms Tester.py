@@ -211,12 +211,15 @@ def counting(data,show):
             print(count)
             t.sleep(1)
             print(f"Added the item to the {i}'s slot")
+            t.sleep(1)
     if show:
         print("Go through the new list and add the previous item the the next")
         t.sleep(1)
     for i in range(1,max+1):
         if show:
             print(f"Adding {count[i-1]} to the "+f"{i}'s slot")
+            t.sleep(1)
+            print(count)
             t.sleep(1)
         count[i]+=count[i-1]
     if show:
@@ -230,6 +233,8 @@ def counting(data,show):
             t.sleep(1)
             print(f"Then subtract one from the 2nd list at the {data[i]} slot")
             t.sleep(1)
+            print(newdata)
+            t.sleep(1)
         newdata[count[data[i]]-1]=data[i]
         count[data[i]]-=1
 
@@ -240,17 +245,56 @@ def radix(data,show):
     for k in range(len(data)):
         if data[k]>max:
             max=data[k]
+    if show:
+        print("Find the max of the data")
+        t.sleep(1)
     exp=1
     while max/exp>=1:
+        if show:
+            print("Preform counting sort for each digit of each part of the data")
+            t.sleep(1)
         n = len(data)
         newdata=[0]*(n)
         count=[0]*(10)
+        if show:
+            print("Make a list that has a length equal to the max of the data")
+            t.sleep(1)
+            print("Go through the data and add 1 to the corrosponding thing in count")
+            t.sleep(1)
         for i in range(0,n):
+            if show:
+                print(f"Item: {(data[i]//exp)%10}")
+                t.sleep(1)
             count[(data[i]//exp)%10]+=1
+            if show:
+                print(count)
+                t.sleep(1)
+                print(f"Added the item to the {(data[i]//exp)%10}'s slot")
+                t.sleep(1)
+        if show:
+            print("Go through the new list and add the previous item the the next")
+            t.sleep(1)
         for i in range(1, 10):
+            if show:
+                print(f"Adding {count[i-1]} to the "+f"{i}'s slot")
+                t.sleep(1)
+                print(count)
+                t.sleep(1)
             count[i]+=count[i-1]
         i=n-1
+        if show:
+            print("Make the final list")
+            t.sleep(1)
+            print("then go through each item in the orignal list")
+            t.sleep(1)
         while i>=0:
+            if show:
+                print(f"Set the item in the final list to {(data[i]//exp)%10} "+f"At the slot corrosponding to the 2nd list at the {(data[i]//exp)%10} slot")
+                t.sleep(1)
+                print(f"Then subtract one from the 2nd list at the {(data[i]//exp)%10} slot")
+                t.sleep(1)
+                print(newdata)
+                t.sleep(1)
             newdata[count[(data[i]//exp)%10]-1]=data[i]
             count[(data[i]//exp)%10]-=1
             i-=1
