@@ -46,7 +46,6 @@ def bubble(data,show):
                 (data[i],data[i+1])=(data[i+1],data[i])
                 
                 done=False
-                time+=1
     return data
 
 
@@ -140,34 +139,12 @@ def quick(data,show):
         return data
     else:
         return data
-def quickt(data):
-    if len(data)>1:
-        time=0
-        i=-1
-        j=0
-        pivot=len(data)-1
-        for _ in range(len(data)):
-            if data[j]<data[pivot]:
-                i+=1
-                temp=data[i]
-                data[i]=data[j]
-                data[j]=temp
-            j+=1
-            if j==pivot:
-                i+=1
-                temp=data[i]
-                data[i]=data[j]
-                data[j]=temp
-                data=quickt(data.copy()[:i])+[data[i]]+quickt(data.copy()[i+1:])
-                break
-        return data
-    else:
-        return data
-def merge(data):
+
+def merge(data,show):
     if len(data)<=1:
         return data
-    left=merge(data[:len(data)//2])
-    right=merge(data[len(data)//2:])
+    left=merge(data[:len(data)//2],show)
+    right=merge(data[len(data)//2:],show)
 
 
     newdata = []
@@ -436,21 +413,32 @@ if show=="no":
     print(data)
 if sort=="bubble" or sort=="bubblesort" or sort=="bubble sort":
     output=bubble(data,show)
-    time=timeit.timeit(lambda:bubble(data,False))
+    time1=t.time()
+    bubble(data,False)
+    time2=t.time()
 if sort=="insertion" or sort=="insertionsort" or sort=="insertion sort":
-    output=insertion(data,show)
-    time=timeit.timeit(lambda:insertion(data,False))
+    insertion(data,show)
+    time1=t.time()
+    insertion(data,False)
+    time2=t.time()
 if sort=="selection" or sort=="selectionsort" or sort=="selection sort":
     output=selection(data,show)
-    time=timeit.timeit(lambda:selection(data,False))
+    time1=t.time()
+    selection(data,False)
+    time2=t.time()
 if sort=="quick" or sort=="quicksort" or sort=="quick sort":
     output=quick(data,show)
-    time1=t.perf_counter()
-    output=quick(data,False)
-    time2=t.perf_counter()
-    print(time1,time2)
-print(output)
-print(f"Time: {round(time,4)} Seconds")
+    time1=t.time()
+    quick(data,False)
+    time2=t.time()
+if sort=="merge" or sort=="mergesort" or sort=="merge sort":
+    output=merge(data,show)
+    time1=t.time()
+    merge(data,False)
+    time2=t.time()
+#print(output)
+print(f"Time: {round((time2-time1)*1000,4)} milliseconds")
+print(time1,time2)
 
 
 
