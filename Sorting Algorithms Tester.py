@@ -180,7 +180,7 @@ def counting(data):
 
     return newdata
 
-def radix(data):
+def radix(data,show):
     max=data[0]
     for k in range(len(data)):
         if data[k]>max:
@@ -205,7 +205,7 @@ def radix(data):
         exp*=10
     return data
 
-def bingo(data):
+def bingo(data,show):
     time=0
     newdata=[]
     min=data[0]
@@ -232,7 +232,7 @@ def bingo(data):
             
     return data
 
-def shell(data):
+def shell(data,show):
     gap=len(data)//2
     while gap>0:
         gap2=gap
@@ -370,7 +370,7 @@ def fancynum(num):
         return str(num)+"th"
 
 
-print("Bubble\nInsertion\nSelection\nQuick")
+print("Bubble\nInsertion\nSelection\nQuick\nMerge\nRadix\nBingo\nShell")
 sort=input("What sorting algorithm would you like to use?: ").lower()
 datatyp=input("Whould you like to input your own data?(otherwise a random set will be generated): ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter":
@@ -435,6 +435,21 @@ if sort=="merge" or sort=="mergesort" or sort=="merge sort":
     output=merge(data,show)
     time1=t.time()
     merge(data,False)
+    time2=t.time()
+if sort=="radix" or sort=="radixsort" or sort=="radix sort":
+    output=radix(data,show)
+    time1=t.time()
+    radix(data,False)
+    time2=t.time()
+if sort=="bingo" or sort=="bingosort" or sort=="bingo sort":
+    output=bingo(data,show)
+    time1=t.time()
+    bingo(data,False)
+    time2=t.time()
+if sort=="shell" or sort=="shellsort" or sort=="shell sort":
+    output=shell(data,show)
+    time1=t.time()
+    shell(data,False)
     time2=t.time()
 #print(output)
 print(f"Time: {round((time2-time1)*1000,4)} milliseconds")
