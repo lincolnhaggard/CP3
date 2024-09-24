@@ -349,58 +349,6 @@ def shell(data,show):
         gap=gap//2
     return data
 
-def tim(data):
-    #I barely understand any of this, this is build from redit posts and geeksforgeeks explanations
-    n = len(data) 
-    r=0
-    while n>=32:
-        r|=n&1
-        n>>=1
-        #I don't get why this works, but it does
-    minRun = n+r
-    for start in range(0, n, minRun): 
-        end = min(start + minRun - 1, n - 1) 
-        for i in range(start + 1, end + 1): 
-            j = i 
-            while j > start and data[j] < data[j - 1]: 
-                temp=data[j]
-                data[j]=data[j - 1]
-                data[j-1]=temp 
-                j -= 1
-    size=minRun 
-    while size < n: 
-        for left in range(0, n, 2 * size): 
-            mid = min(n - 1, left + size - 1) 
-            right = min((left + 2 * size - 1), (n - 1)) 
-            if mid < right: 
-                l=left
-                m=mid
-                r=right
-                len1, len2 = m - l + 1, r - m 
-                left, right = [], [] 
-                for i in range(0, len1): 
-                    left.append(data[l + i]) 
-                for i in range(0, len2): 
-                    right.append(data[m + 1 + i]) 
-                i, j, k = 0, 0, l 
-                while i<len1 and j<len2: 
-                    if left[i]<=right[j]: 
-                        data[k]=left[i] 
-                        i+=1
-                    else: 
-                        data[k]=right[j] 
-                        j+=1
-                    k+=1
-                while i<len1: 
-                    data[k]=left[i] 
-                    k+=1
-                    i+=1
-                while j<len2: 
-                    data[k]=right[j] 
-                    k+=1
-                    j+=1
-        size = 2 * size 
-    return data
 
 def comb(data):
     gap=len(data)//1.3
