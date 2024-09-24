@@ -305,8 +305,6 @@ def radix(data,show):
     return data
 
 def bingo(data,show):
-    time=0
-    newdata=[]
     min=data[0]
     max=data[0]
     
@@ -315,9 +313,15 @@ def bingo(data,show):
             max=data[k]
         if data[k]<min:
             min=data[k]
+    if show:
+        print(f"Gets the min({min})"+f" and the max({max}) of the data")
+        t.sleep(1)
+        print("Bingo=max, and j=0")
+        t.sleep(1)
     bingo=max
     j=0
     while min<bingo:
+        print(f"Whie min<bingo go through the data starting at the j({j})'s place")
         for i in range(j,len(data)):
             if data[i]==min:
                 temp=data[i]
