@@ -34,15 +34,15 @@ def bubble(data,show):
             #checks if needs to be swapped
             if show:
                 print(data)
-                t.sleep(0.3)
+                t.sleep(1)
                 print("Swap "+str(data[i])+" and "+str(data[i+1])+" if "+str(data[i])+" is greater than "+str(data[i+1]))
-                t.sleep(0.3)
+                t.sleep(1)
                 print(str(data[i])+">"+str(data[i+1])+"="+str(data[i]>data[i+1]))
-                t.sleep(0.3)
+                t.sleep(1)
             if data[i]>data[i+1]:
                 if show:
                     print("Swaped "+str(data[i])+" and "+str(data[i+1]))
-                    t.sleep(0.3)
+                    t.sleep(1)
                 (data[i],data[i+1])=(data[i+1],data[i])
                 
                 done=False
@@ -57,7 +57,7 @@ def insertion(data,show):
         if show:
             print(data)
             print(f"Inserting {var}")
-            t.sleep(0.3)
+            t.sleep(1)
         k=i-1
         while k>=0 and data[k]>var:
             data[k+1]=data[k]
@@ -65,7 +65,7 @@ def insertion(data,show):
         data[k+1]=var
         if show:
             print(str(var)+f" goes in the {k+1}s slot")
-            t.sleep(0.3)
+            t.sleep(1)
     return data
 
 def selection(data,show):
@@ -81,11 +81,12 @@ def selection(data,show):
                 min=data[k]
         if show:
             print(f"The min is {min}")
-            t.sleep(0.3)
+            t.sleep(1)
+            print("Put the min at the beginning of new list")
         newdata.append(min)
         if show:
             print(newdata)
-            t.sleep(0.3)
+            t.sleep(1)
         data.remove(min)
     return newdata
 
@@ -99,39 +100,39 @@ def quick(data,show):
             if show:
                 print(data)
                 print(f"pointer 1: {i}")
-                t.sleep(0.3)
+                t.sleep(1)
                 print(f"pointer 2: {j}")
-                t.sleep(0.3)
+                t.sleep(1)
                 print(f"Is {data[j]} less than"+f" {data[pivot]}")
-                t.sleep(0.3)
+                t.sleep(1)
             if data[j]<data[pivot]:
                 if show:
                     print("Yes, incremeant pointer 1 by 1 and swap")
-                    t.sleep(0.3)
+                    t.sleep(1)
                 i+=1
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
             if show:
                 print("Increament pointer 2 by 1")
-                t.sleep(0.3)
+                t.sleep(1)
             j+=1
             if show:
                 print("Is pointer 2 at the piviot?")
-                t.sleep(0.3)
+                t.sleep(1)
             if j==pivot:
                 i+=1
                 if show:
                     print("Yes, increament pointer 1 by 1")
-                    t.sleep(0.3)
+                    t.sleep(1)
                     print("Swap the number at pointer 1 and the piviot")
-                    t.sleep(0.3)
+                    t.sleep(1)
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
                 if show:
                     print("Split the list around the piviot and repeat")
-                    t.sleep(0.3)
+                    t.sleep(1)
                 data=quick(data.copy()[:i],show)+[data[i]]+quick(data.copy()[i+1:],show)
                 if show:
                     print("combine back together")
@@ -141,11 +142,27 @@ def quick(data,show):
         return data
 
 def merge(data,show):
+    if show:
+        print("Check if the data has a length greater than 1")
+        t.sleep(1)
     if len(data)<=1:
+        if show:
+            print("The data is one item long return data")
+            t.sleep(1)
         return data
+    if show:
+        print(data)
+        print("Split the data into left and right half down the middle and do merge sort on each of them")
+        t.sleep(1)
+        print(f"Left: {data[:len(data)//2]}")
+        t.sleep(1)
+        print(f"Right: {data[len(data)//2:]}")
+        t.sleep(1)
     left=merge(data[:len(data)//2],show)
     right=merge(data[len(data)//2:],show)
-
+    if show:
+        print("Make a new list")
+        t.sleep(1)
 
     newdata = []
     i = 0
@@ -158,23 +175,61 @@ def merge(data,show):
         else:
             newdata.append(right[j])
             j += 1
+    if show:
+        print("Combine the data into the right order")
+        t.sleep(1)
 
     newdata=newdata+left[i:]
     newdata=newdata+right[j:]
+    if show:
+        print(newdata)
+        print("Return the new data")
+        t.sleep(1)
     return newdata
 
-def counting(data):
+def counting(data,show):
     max=data[0]
     newdata=[0]*len(data)
     for k in range(len(data)):
         if data[k]>max:
             max=data[k]
+    if show:
+        print("Find the max of the data")
+        t.sleep(1)
     count=[0]*(max+1)
+    if show:
+        print("Make a list that has a length equal to the max of the data")
+        t.sleep(1)
+        print("Go through the data and add 1 to the corrosponding thing in count")
+        t.sleep(1)
     for i in data:
+        if show:
+            print(f"Item: {i}")
+            t.sleep(1)
         count[i]+=1
+        if show:
+            print(count)
+            t.sleep(1)
+            print(f"Added the item to the {i}'s slot")
+    if show:
+        print("Go through the new list and add the previous item the the next")
+        t.sleep(1)
     for i in range(1,max+1):
+        if show:
+            print(f"Adding {count[i-1]} to the "+f"{i}'s slot")
+            t.sleep(1)
         count[i]+=count[i-1]
+    if show:
+        print("Make the final list")
+        t.sleep(1)
+        print("then go through each item in the orignal list")
+        t.sleep(1)
     for i in range(len(data)):
+        if show:
+            print(f"Set the item in the final list to {data[i]} "+f"At the slot corrosponding to the 2nd list at the {data[i]} slot")
+            t.sleep(1)
+            print(f"Then subtract one from the 2nd list at the {data[i]} slot")
+            t.sleep(1)
         newdata[count[data[i]]-1]=data[i]
         count[data[i]]-=1
 
@@ -370,7 +425,7 @@ def fancynum(num):
         return str(num)+"th"
 
 
-print("Bubble\nInsertion\nSelection\nQuick\nMerge\nRadix\nBingo\nShell")
+print("Bubble\nInsertion\nSelection\nQuick\nMerge\nCounting\nRadix\nBingo\nShell")
 sort=input("What sorting algorithm would you like to use?: ").lower()
 datatyp=input("Whould you like to input your own data?(otherwise a random set will be generated): ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter":
@@ -436,6 +491,11 @@ if sort=="merge" or sort=="mergesort" or sort=="merge sort":
     time1=t.time()
     merge(data,False)
     time2=t.time()
+if sort=="counting" or sort=="countingsort" or sort=="counting sort":
+    output=counting(data,show)
+    time1=t.time()
+    counting(data,False)
+    time2=t.time()
 if sort=="radix" or sort=="radixsort" or sort=="radix sort":
     output=radix(data,show)
     time1=t.time()
@@ -451,9 +511,9 @@ if sort=="shell" or sort=="shellsort" or sort=="shell sort":
     time1=t.time()
     shell(data,False)
     time2=t.time()
-#print(output)
+print(output)
 print(f"Time: {round((time2-time1)*1000,4)} milliseconds")
-print(time1,time2)
+
 
 
 
