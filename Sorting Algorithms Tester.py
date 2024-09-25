@@ -1,6 +1,5 @@
 import random
 import time as t
-import timeit
 """
 /|bubble
 /|Insertion
@@ -502,6 +501,8 @@ def cocktail(data,show):
                 if show:
                     print("Swapped")
                     t.sleep(1)
+                    print(f"Set the upper limit to {i}")
+                    t.sleep(1)
                 (data[i],data[i+1])=(data[i+1],data[i])
                 done=False
                 top=i
@@ -517,6 +518,8 @@ def cocktail(data,show):
             if data[i]<data[i-1]:
                 if show:
                     print("Swapped")
+                    t.sleep(1)
+                    print(f"Set the lower limit to {i}")
                     t.sleep(1)
                 (data[i],data[i-1])=(data[i-1],data[i])
                 done=False
