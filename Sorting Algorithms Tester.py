@@ -13,7 +13,7 @@ O|Heap
 O|Bucket
 /|Bingo
 /|Shell
-//|Tim
+O|Tim
 /|Comb
 /|pigeonhole
 O|Cycle
@@ -483,22 +483,45 @@ def pigeonhole(data,show):
             t.sleep(1)
     return newdata
 
-def cocktail(data):
-    time=0
+def cocktail(data,show):
     done=False
+    top=len(data)-1
+    bottom=0
     while not done:
         done=True
-        for i in range(len(data)-1):
+        if show:
+            print("Goes from the bottom of the data to the top swapping adjacent if they are in the wrong order")
+            t.sleep(1)
+        for i in range(top):
+            if show:
+                print(data)
+                t.sleep(1)
+                print(f"Compare {data[i]}"+f" and {data[i+1]}")
+                t.sleep(1)
             if data[i]>data[i+1]:
+                if show:
+                    print("Swapped")
+                    t.sleep(1)
                 (data[i],data[i+1])=(data[i+1],data[i])
                 done=False
-                time+=1
-        for i in range(len(data)-1,0,-1):
+                top=i
+        if show:
+            print("Goes from the top of the data to the bottom swapping adjacent if they are in the wrong order")
+            t.sleep(1)
+        for i in range(top,bottom,-1):
+            if show:
+                print(data)
+                t.sleep(1)
+                print(f"Compare {data[i]}"+f" and {data[i-1]}")
+                t.sleep(1)
             if data[i]<data[i-1]:
+                if show:
+                    print("Swapped")
+                    t.sleep(1)
                 (data[i],data[i-1])=(data[i-1],data[i])
                 done=False
-                time+=1
-    return (data,time)
+                bottom=i
+    return data
 
 
 
@@ -513,7 +536,7 @@ def fancynum(num):
         return str(num)+"th"
 
 
-print("Bubble\nInsertion\nSelection\nQuick\nMerge\nCounting\nRadix\nBingo\nShell\nComb\nPigeon Hole")
+print("Bubble\nInsertion\nSelection\nQuick\nMerge\nCounting\nRadix\nBingo\nShell\nComb\nPigeon Hole\nCocktail")
 sort=input("What sorting algorithm would you like to use?: ").lower()
 datatyp=input("Whould you like to input your own data?(otherwise a random set will be generated): ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter":
@@ -608,6 +631,11 @@ if sort=="pigeonhole" or sort=="pigeonholesort" or sort=="pigeonhole sort" or so
     output=pigeonhole(data,show)
     time1=t.time()
     pigeonhole(data,False)
+    time2=t.time()
+if sort=="cocktail" or sort=="cocktailsort" or sort=="cocktail sort":
+    output=cocktail(data,show)
+    time1=t.time()
+    cocktail(data,False)
     time2=t.time()
 print(output)
 print(f"Time: {round((time2-time1)*1000,4)} milliseconds")
