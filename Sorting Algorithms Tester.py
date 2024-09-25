@@ -408,6 +408,7 @@ def comb(data,show):
         print(f"Set gap to the length of the data divided by 1.3 round down({gap})")
         t.sleep(1)
         print("Then repeates the following until no swaps are made")
+        t.sleep(1)
     done=False
     while not done:
         done=True
@@ -417,6 +418,8 @@ def comb(data,show):
         for i in range(len(data)):
             if i+int(gap)<len(data):
                 if show:
+                    print(data)
+                    t.sleep(1)
                     print(f"Checks {data[i]}"+f" and {data[i+int(gap)]}")
                     t.sleep(1)
                 if data[i]>data[i+int(gap)]:
@@ -440,7 +443,7 @@ def comb(data,show):
         
     return data
 
-def pigeonhole(data):
+def pigeonhole(data,show):
     min=data[0]
     max=data[0]
     
@@ -449,13 +452,35 @@ def pigeonhole(data):
             max=data[k]
         if data[k]<min:
             min=data[k]
+    if show:
+        print("Makes an array with the lower bounds being the min and the upper being the max")
+        t.sleep(1)
+        print("Then goes through the data and puts it in it's corresponding spot")
+        t.sleep(1)
     holes=[0]*(max-min+1)
     for i in data:
-        print(i-min)
+        if show:
+            print(f"data:{i}")
+            print(f"Hole: {i-min}")
+            t.sleep(1)
         holes[i-min]+=1
+        if show:
+            print(holes)
+            t.sleep(1)
+    if show:
+        print("Makes a new list")
+        t.sleep(1)
+        print("Then goes through the holes list and adds it to the new list as the corrosponding number")
+        t.sleep(1)
     newdata=[]
     for i in range(len(holes)):
+        if show:
+            print(f"Hole, slot: {i}"+f" pigeons: {holes[i]}")
+            t.sleep(1)
         newdata+=[i+min]*holes[i]
+        if show:
+            print(newdata)
+            t.sleep(1)
     return newdata
 
 def cocktail(data):
@@ -488,7 +513,7 @@ def fancynum(num):
         return str(num)+"th"
 
 
-print("Bubble\nInsertion\nSelection\nQuick\nMerge\nCounting\nRadix\nBingo\nShell\nComb")
+print("Bubble\nInsertion\nSelection\nQuick\nMerge\nCounting\nRadix\nBingo\nShell\nComb\nPigeon Hole")
 sort=input("What sorting algorithm would you like to use?: ").lower()
 datatyp=input("Whould you like to input your own data?(otherwise a random set will be generated): ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter":
@@ -578,6 +603,11 @@ if sort=="comb" or sort=="combsort" or sort=="comb sort":
     output=comb(data,show)
     time1=t.time()
     comb(data,False)
+    time2=t.time()
+if sort=="pigeonhole" or sort=="pigeonholesort" or sort=="pigeonhole sort" or sort=="pigeon hole" or sort=="pigeon holesort" or sort=="pigeon hole sort":
+    output=pigeonhole(data,show)
+    time1=t.time()
+    pigeonhole(data,False)
     time2=t.time()
 print(output)
 print(f"Time: {round((time2-time1)*1000,4)} milliseconds")
