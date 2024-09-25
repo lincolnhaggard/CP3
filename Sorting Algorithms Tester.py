@@ -433,7 +433,9 @@ def comb(data,show):
         if gap!=1:
             
             gap=gap//1.3
-            print(gap)
+            if show:
+                print(f"gap: {gap}")
+                t.sleep(1)
             done=False
         
     return data
@@ -486,7 +488,7 @@ def fancynum(num):
         return str(num)+"th"
 
 
-print("Bubble\nInsertion\nSelection\nQuick\nMerge\nCounting\nRadix\nBingo\nShell")
+print("Bubble\nInsertion\nSelection\nQuick\nMerge\nCounting\nRadix\nBingo\nShell\nComb")
 sort=input("What sorting algorithm would you like to use?: ").lower()
 datatyp=input("Whould you like to input your own data?(otherwise a random set will be generated): ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter":
@@ -571,6 +573,11 @@ if sort=="shell" or sort=="shellsort" or sort=="shell sort":
     output=shell(data,show)
     time1=t.time()
     shell(data,False)
+    time2=t.time()
+if sort=="comb" or sort=="combsort" or sort=="comb sort":
+    output=comb(data,show)
+    time1=t.time()
+    comb(data,False)
     time2=t.time()
 print(output)
 print(f"Time: {round((time2-time1)*1000,4)} milliseconds")
