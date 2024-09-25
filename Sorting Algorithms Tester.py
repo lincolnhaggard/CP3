@@ -402,19 +402,36 @@ def shell(data,show):
     return data
 
 
-def comb(data):
+def comb(data,show):
     gap=len(data)//1.3
+    if show:
+        print(f"Set gap to the length of the data divided by 1.3 round down({gap})")
+        t.sleep(1)
+        print("Then repeates the following until no swaps are made")
     done=False
     while not done:
         done=True
+        if show:
+            print(f"Goes through and swaps data the are gap({gap}) appart if they are in the wrong order")
+            t.sleep(1)
         for i in range(len(data)):
             if i+int(gap)<len(data):
+                if show:
+                    print(f"Checks {data[i]}"+f" and {data[i+int(gap)]}")
+                    t.sleep(1)
                 if data[i]>data[i+int(gap)]:
+                    if show:
+                        print("Swapped")
+                        t.sleep(1)
                     temp=data[i]
                     data[i]=data[i+int(gap)]
                     data[i+int(gap)]=temp
                     done=False
+        if show:
+            print("Divides the gap by 1.3 with a minumun of 1")
+            t.sleep(1)
         if gap!=1:
+            
             gap=gap//1.3
             print(gap)
             done=False
