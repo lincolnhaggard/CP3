@@ -612,8 +612,8 @@ def fancynum(num):
 
 print("Bubble\nInsertion\nSelection\nQuick\nHeap\nMerge\nCounting\nRadix\nBingo\nShell\nComb\nPigeon Hole\nCocktail")
 sort=input("What sorting algorithm would you like to use?: ").lower()
-datatyp=input("Whould you like to input your own data?(otherwise a random set will be generated): ").lower()
-if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter":
+datatyp=input("Whould you like to enter your own data or use a randomly generated set?: ").lower()
+if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter" or datatyp=="enterdata":
     done=False
     while not done:
         try:
@@ -656,68 +656,73 @@ if sort=="bubble" or sort=="bubblesort" or sort=="bubble sort":
     time1=t.time()
     bubble(data,False)
     time2=t.time()
-if sort=="insertion" or sort=="insertionsort" or sort=="insertion sort":
+elif sort=="insertion" or sort=="insertionsort" or sort=="insertion sort":
     insertion(data,show)
     time1=t.time()
     insertion(data,False)
     time2=t.time()
-if sort=="selection" or sort=="selectionsort" or sort=="selection sort":
+elif sort=="selection" or sort=="selectionsort" or sort=="selection sort":
     output=selection(data,show)
     time1=t.time()
     selection(data,False)
     time2=t.time()
-if sort=="quick" or sort=="quicksort" or sort=="quick sort":
+elif sort=="quick" or sort=="quicksort" or sort=="quick sort":
     output=quick(data,show)
     time1=t.time()
     quick(data,False)
     time2=t.time()
-if sort=="heap" or sort=="heapsort" or sort=="heap sort":
+elif sort=="heap" or sort=="heapsort" or sort=="heap sort":
     output=heap(data,show)
     time1=t.time()
     heap(data,False)
     time2=t.time()
-if sort=="merge" or sort=="mergesort" or sort=="merge sort":
+elif sort=="merge" or sort=="mergesort" or sort=="merge sort":
     output=merge(data,show)
     time1=t.time()
     merge(data,False)
     time2=t.time()
-if sort=="counting" or sort=="countingsort" or sort=="counting sort":
+elif sort=="counting" or sort=="countingsort" or sort=="counting sort":
     output=counting(data,show)
     time1=t.time()
     counting(data,False)
     time2=t.time()
-if sort=="radix" or sort=="radixsort" or sort=="radix sort":
+elif sort=="radix" or sort=="radixsort" or sort=="radix sort":
     output=radix(data,show)
     time1=t.time()
     radix(data,False)
     time2=t.time()
-if sort=="bingo" or sort=="bingosort" or sort=="bingo sort":
+elif sort=="bingo" or sort=="bingosort" or sort=="bingo sort":
     output=bingo(data,show)
     time1=t.time()
     bingo(data,False)
     time2=t.time()
-if sort=="shell" or sort=="shellsort" or sort=="shell sort":
+elif sort=="shell" or sort=="shellsort" or sort=="shell sort":
     output=shell(data,show)
     time1=t.time()
     shell(data,False)
     time2=t.time()
-if sort=="comb" or sort=="combsort" or sort=="comb sort":
+elif sort=="comb" or sort=="combsort" or sort=="comb sort":
     output=comb(data,show)
     time1=t.time()
     comb(data,False)
     time2=t.time()
-if sort=="pigeonhole" or sort=="pigeonholesort" or sort=="pigeonhole sort" or sort=="pigeon hole" or sort=="pigeon holesort" or sort=="pigeon hole sort":
+elif sort=="pigeonhole" or sort=="pigeonholesort" or sort=="pigeonhole sort" or sort=="pigeon hole" or sort=="pigeon holesort" or sort=="pigeon hole sort":
     output=pigeonhole(data,show)
     time1=t.time()
     pigeonhole(data,False)
     time2=t.time()
-if sort=="cocktail" or sort=="cocktailsort" or sort=="cocktail sort":
+elif sort=="cocktail" or sort=="cocktailsort" or sort=="cocktail sort":
     output=cocktail(data,show)
     time1=t.time()
     cocktail(data,False)
     time2=t.time()
-print(output)
-print(f"Time: {round((time2-time1)*1000,4)} milliseconds")
+else:
+    output=False
+if output!=False:
+    print(output)
+    print(f"Time: {round((time2-time1)*1000,4)} milliseconds")
+else:
+    print("Sorting algorithmn not reconized")
 
 
 
