@@ -5,7 +5,7 @@ import time as t
 /|Insertion
 /|Selection
 /|quick
-O|Heap
+/|Heap
 /|Merge
 /|Counting
 /|Radix
@@ -139,6 +139,77 @@ def quick(data,show):
         return data
     else:
         return data
+
+
+def heapify(data,n,i,show):
+    largest=i
+    if show:
+        print(f"Checks the left and right to the root(index:{largest}) and then swaps if needed")
+        t.sleep(1)
+        if 2*i+1<n:
+            print("The left node exists")
+            t.sleep(1)
+            print(f"Left node:{data[i*2+1]}",f"Root:{data[largest]}")
+            t.sleep(1)
+            if data[largest]<data[2*i+1]:
+                print("Made the left node the root")
+                t.sleep(1)
+
+        else:
+            print("The left node does not exist")
+            t.sleep(1)
+    if 2*i+1<n and data[largest]<data[2*i+1]:
+        largest=2*i+1
+    if show:
+        if 2*i+2<n:
+            print("The right node exists")
+            t.sleep(1)
+            print(f"Right node:{data[i*2+2]}",f"Root:{data[largest]}")
+            t.sleep(1)
+            if data[largest]<data[2*i+2]:
+                print("Made the right node the root")
+                t.sleep(1)
+
+        else:
+            print("The right node does not exist")
+            t.sleep(1)
+    if 2*i+2<n and data[largest]<data[2*i+2]:
+        largest=2*i+2
+
+
+    if show:
+        print("If the root is not the starting root, swap the root and the starting root, then heapify again")
+        t.sleep(1)
+    if largest!=i:
+        if show:
+            print("Swapped and heapifying")
+            t.sleep(1)
+        temp=data[i]
+        data[i]=data[largest]
+        data[largest]=temp
+        if show:
+            print(f"Data: {data}")
+            t.sleep(1)
+        heapify(data,n,largest,show) 
+
+def heap(data,show):
+    if show:
+        print("Builds a max heap")
+        t.sleep(1)
+    for i in range(len(data)//2-1,-1,-1):
+        heapify(data,len(data),i,show)
+
+    if show:
+        print("Goes through from right to left and swaps the current value with the first value and then heapifies")
+        t.sleep(1)
+    for i in range(len(data)-1,0,-1):
+        temp=data[i]
+        data[i]=data[0]
+        data[0]=temp
+        heapify(data,i,0,show)
+    return data
+print(heap([2,6,3,4,1,5,7,9,8,10],True))
+
 
 def merge(data,show):
     if show:
@@ -539,7 +610,7 @@ def fancynum(num):
         return str(num)+"th"
 
 
-print("Bubble\nInsertion\nSelection\nQuick\nMerge\nCounting\nRadix\nBingo\nShell\nComb\nPigeon Hole\nCocktail")
+print("Bubble\nInsertion\nSelection\nQuick\nHeap\nMerge\nCounting\nRadix\nBingo\nShell\nComb\nPigeon Hole\nCocktail")
 sort=input("What sorting algorithm would you like to use?: ").lower()
 datatyp=input("Whould you like to input your own data?(otherwise a random set will be generated): ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter":
@@ -599,6 +670,11 @@ if sort=="quick" or sort=="quicksort" or sort=="quick sort":
     output=quick(data,show)
     time1=t.time()
     quick(data,False)
+    time2=t.time()
+if sort=="heap" or sort=="heapsort" or sort=="heap sort":
+    output=heap(data,show)
+    time1=t.time()
+    heap(data,False)
     time2=t.time()
 if sort=="merge" or sort=="mergesort" or sort=="merge sort":
     output=merge(data,show)
