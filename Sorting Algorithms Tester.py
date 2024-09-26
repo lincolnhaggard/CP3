@@ -639,8 +639,9 @@ else:
     while not done:
         try:
             data=[]
+            max=int(input("What would you like the max to be: "))
             for i in range(int(input("How many numbers would you like: "))):
-                data.append(random.randint(0,999))
+                data.append(random.randint(0,max))
             done=True
         except:
             print("Something went wrong try again")
