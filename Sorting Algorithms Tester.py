@@ -208,7 +208,7 @@ def heap(data,show):
         data[0]=temp
         heapify(data,i,0,show)
     return data
-print(heap([2,6,3,4,1,5,7,9,8,10],True))
+
 
 
 def merge(data,show):
