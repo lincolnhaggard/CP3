@@ -597,6 +597,34 @@ def cocktail(data,show):
                 bottom=i
     return data
 
+def bitonic2(data,low,k,dire):
+    if k>1:
+        for i in range(low,low+(k//2)):
+            
+            if (dire==1 and data[i]>data[i+(k//2)]) or (dire==0 and data[i]<data[i+(k//2)]):
+                temp=data[i]
+                data[i]=data[i+(k//2)]
+                data[i+(k//2)]=temp
+            
+        data=bitonic2(data,low,k//2,dire)
+        data=bitonic2(data,low+(k//2),k//2,dire)
+    return data
+
+def bitonic(data,show,low=0,k=False,dire=1):
+    if k==False:
+        k=len(data)
+    length=2
+    while length<len(data):
+        length*=2
+    data=data+([0]*(length-len(data)))
+    if k>1:
+        data=bitonic(data,show,low,k//2,1)
+        data=bitonic(data,show,low+(k//2),k//2,0)
+        data=bitonic2(data,show,low,k,dire)
+    
+    return data
+
+
 
 
 def fancynum(num):
@@ -658,7 +686,7 @@ if sort=="bubble" or sort=="bubblesort" or sort=="bubble sort":
     bubble(data,False)
     time2=t.time()
 elif sort=="insertion" or sort=="insertionsort" or sort=="insertion sort":
-    insertion(data,show)
+    output=insertion(data,show)
     time1=t.time()
     insertion(data,False)
     time2=t.time()
