@@ -597,31 +597,97 @@ def cocktail(data,show):
                 bottom=i
     return data
 
-def bitonic2(data,low,k,dire):
+def bitonic2(data,show,low,k,dire):
+    if show:
+        print("Checks if the length of the list is one")
+        t.sleep(1)
     if k>1:
+        if show:
+            print("goes through its designated half of the list and sorts")
+            t.sleep(1)
+            if dire==1:
+                print("assending")
+            else:
+                print("desending")
+            t.sleep(1)
         for i in range(low,low+(k//2)):
-            
+            if show:
+                print(data)
+                t.sleep(1)
+                print(f"Checks {data[i]} "+f"and {data[i+(k//2)]}")
+                t.sleep(1)
             if (dire==1 and data[i]>data[i+(k//2)]) or (dire==0 and data[i]<data[i+(k//2)]):
+                if show:
+                    print("Swapped")
+                    t.sleep(1)
+                    print(data)
+                    t.sleep(1)
                 temp=data[i]
                 data[i]=data[i+(k//2)]
                 data[i+(k//2)]=temp
-            
-        data=bitonic2(data,low,k//2,dire)
-        data=bitonic2(data,low+(k//2),k//2,dire)
+        if show:
+            print("Does the second functionon the lower half of the list")
+            t.sleep(1) 
+        data=bitonic2(data,show,low,k//2,dire)
+        if show:
+            print("Does the sorting on the other half of the list")
+            t.sleep(1)
+        data=bitonic2(data,show,low+(k//2),k//2,dire)
+    if show:
+        print("Returns the data")
+        t.sleep(1)
     return data
 
 def bitonic(data,show,low=0,k=False,dire=1):
     if k==False:
         k=len(data)
     length=2
+    if show:
+        print("Adds filler to make the length of the list a power of two")
+        t.sleep(1)
     while length<len(data):
         length*=2
     data=data+([0]*(length-len(data)))
+    if length-len(data)>0:
+        final=True
+    else:
+        final=False
+    if show:
+        print("Checks if the lenght of the data is greater than one")
+        t.sleep(1)
     if k>1:
+        if show:
+            print("Runs the first function again, with the lenght being half of what this one sais it is")
+            t.sleep(1)
+            print("Telling it to start on the lower half of the list and sort it assending")
+            t.sleep(1)
         data=bitonic(data,show,low,k//2,1)
+        if show:
+            print("Then runs the first function on the second half of the list, telling it to sort desending")
+            t.sleep(1)
         data=bitonic(data,show,low+(k//2),k//2,0)
+        if show:
+            print("Then it starts sorting the list, on what side it is either asending or desending")
+            t.sleep(1)
+            if dire==1:
+                print("assending")
+            else:
+                print("desending")
+            t.sleep(1)
         data=bitonic2(data,show,low,k,dire)
-    
+    elif show:
+        print("The data was only one item long")
+        t.sleep(1)
+    if show:
+        print("returning the data")
+        t.sleep(1)
+
+    if final:
+        if show:
+            print("Removes filler")
+            t.sleep(1)
+        for i in range(length-len(data)):
+            data.remove(0)
     return data
 
 
@@ -638,7 +704,7 @@ def fancynum(num):
         return str(num)+"th"
 
 
-print("Bubble\nInsertion\nSelection\nQuick\nHeap\nMerge\nCounting\nRadix\nBingo\nShell\nComb\nPigeon Hole\nCocktail")
+print("Bubble\nInsertion\nSelection\nQuick\nHeap\nMerge\nCounting\nRadix\nBingo\nShell\nComb\nPigeon Hole\nCocktail\nBitonic")
 sort=input("What sorting algorithm would you like to use?: ").lower()
 datatyp=input("Whould you like to enter your own data or use a randomly generated set?: ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter" or datatyp=="enterdata":
@@ -744,6 +810,11 @@ elif sort=="cocktail" or sort=="cocktailsort" or sort=="cocktail sort":
     output=cocktail(data,show)
     time1=t.time()
     cocktail(data,False)
+    time2=t.time()
+elif sort=="bitonic" or sort=="bitonicsort" or sort=="bitonic sort":
+    output=bitonic(data,show)
+    time1=t.time()
+    bitonic(data,False)
     time2=t.time()
 else:
     output=False
