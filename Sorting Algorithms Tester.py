@@ -625,6 +625,7 @@ def bitonic2(data,show,low,k,dire):
                 temp=data[i]
                 data[i]=data[i+(k//2)]
                 data[i+(k//2)]=temp
+                
         if show:
             print("Does the second functionon the lower half of the list")
             t.sleep(1) 
@@ -639,19 +640,23 @@ def bitonic2(data,show,low,k,dire):
     return data
 
 def bitonic(data,show,low=0,k=False,dire=1):
-    if k==False:
-        k=len(data)
     length=2
     if show:
         print("Adds filler to make the length of the list a power of two")
         t.sleep(1)
     while length<len(data):
         length*=2
-    data=data+([0]*(length-len(data)))
     if length-len(data)>0:
         final=True
+        len0=length-len(data)
     else:
         final=False
+    data=data+([0]*(length-len(data)))
+    if k==False:
+        k=len(data)
+    
+    
+    
     if show:
         print("Checks if the lenght of the data is greater than one")
         t.sleep(1)
@@ -686,8 +691,9 @@ def bitonic(data,show,low=0,k=False,dire=1):
         if show:
             print("Removes filler")
             t.sleep(1)
-        for i in range(length-len(data)):
+        for i in range(len0):
             data.remove(0)
+        
     return data
 
 
@@ -733,9 +739,16 @@ else:
     while not done:
         try:
             data=[]
-            max=int(input("What would you like the max to be: "))
-            for i in range(int(input("How many numbers would you like: "))):
-                data.append(random.randint(0,max))
+            loops=int(input("How many numbers would you like: "))
+            max=(input("What would you like the range to be: "))
+            low=0
+            if "-" in max:
+                low=int(max[:max.find("-")])
+                max=int(max[max.find("-")+1:])
+            else:
+                max=int(max)
+            for i in range(loops):
+                data.append(random.randint(low,max))
             done=True
         except:
             print("Something went wrong try again")
