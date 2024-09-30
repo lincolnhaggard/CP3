@@ -40,7 +40,7 @@ def bubble(data,show):
                 t.sleep(1)
             if data[i]>data[i+1]:
                 if show:
-                    print("Swaped "+str(data[i])+" and "+str(data[i+1]))
+                    print("Swapped "+str(data[i])+" and "+str(data[i+1]))
                     t.sleep(1)
                 (data[i],data[i+1])=(data[i+1],data[i])
                 
@@ -106,31 +106,31 @@ def quick(data,show):
                 t.sleep(1)
             if data[j]<data[pivot]:
                 if show:
-                    print("Yes, incremeant pointer 1 by 1 and swap")
+                    print("Yes, Increment pointer 1 by 1 and swap")
                     t.sleep(1)
                 i+=1
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
             if show:
-                print("Increament pointer 2 by 1")
+                print("Increment pointer 2 by 1")
                 t.sleep(1)
             j+=1
             if show:
-                print("Is pointer 2 at the piviot?")
+                print("Is pointer 2 at the pivot?")
                 t.sleep(1)
             if j==pivot:
                 i+=1
                 if show:
-                    print("Yes, increament pointer 1 by 1")
+                    print("Yes, Increment pointer 1 by 1")
                     t.sleep(1)
-                    print("Swap the number at pointer 1 and the piviot")
+                    print("Swap the number at pointer 1 and the pivot")
                     t.sleep(1)
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
                 if show:
-                    print("Split the list around the piviot and repeat")
+                    print("Split the list around the pivot and repeat")
                     t.sleep(1)
                 data=quick(data.copy()[:i],show)+[data[i]]+quick(data.copy()[i+1:],show)
                 if show:
@@ -270,7 +270,7 @@ def counting(data,show):
     if show:
         print("Make a list that has a length equal to the max of the data")
         t.sleep(1)
-        print("Go through the data and add 1 to the corrosponding thing in count")
+        print("Go through the data and add 1 to the corresponding thing in count")
         t.sleep(1)
     for i in data:
         if show:
@@ -295,11 +295,11 @@ def counting(data,show):
     if show:
         print("Make the final list")
         t.sleep(1)
-        print("then go through each item in the orignal list")
+        print("then go through each item in the original list")
         t.sleep(1)
     for i in range(len(data)):
         if show:
-            print(f"Set the item in the final list to {data[i]} "+f"At the slot corrosponding to the 2nd list at the {data[i]} slot")
+            print(f"Set the item in the final list to {data[i]} "+f"At the slot corresponding to the 2nd list at the {data[i]} slot")
             t.sleep(1)
             print(f"Then subtract one from the 2nd list at the {data[i]} slot")
             t.sleep(1)
@@ -329,7 +329,7 @@ def radix(data,show):
         if show:
             print("Make a list that has a length equal to the max of the data")
             t.sleep(1)
-            print("Go through the data and add 1 to the corrosponding thing in count")
+            print("Go through the data and add 1 to the corresponding thing in count")
             t.sleep(1)
         for i in range(0,n):
             if show:
@@ -355,11 +355,11 @@ def radix(data,show):
         if show:
             print("Make the final list")
             t.sleep(1)
-            print("then go through each item in the orignal list")
+            print("then go through each item in the original list")
             t.sleep(1)
         while i>=0:
             if show:
-                print(f"Set the item in the final list to {(data[i]//exp)%10} "+f"At the slot corrosponding to the 2nd list at the {(data[i]//exp)%10} slot")
+                print(f"Set the item in the final list to {(data[i]//exp)%10} "+f"At the slot corresponding to the 2nd list at the {(data[i]//exp)%10} slot")
                 t.sleep(1)
                 print(f"Then subtract one from the 2nd list at the {(data[i]//exp)%10} slot")
                 t.sleep(1)
@@ -392,11 +392,11 @@ def bingo(data,show):
     j=0
     while min<bingo:
         if show:
-            print(f"Whie min<bingo go through the data starting at the j({j})'s place")
+            print(f"While min<bingo go through the data starting at the j({j})'s place")
             t.sleep(1)
         for i in range(j,len(data)):
             if show:
-                print(f"If the data at the {i}s place is equal to the min swap it with the data at the "+f"{j}'s place then increament j by 1")
+                print(f"If the data at the {i}s place is equal to the min swap it with the data at the "+f"{j}'s place then increment j by 1")
                 t.sleep(1)
                 print("Otherwise if data at the {i}s place is less than the bingo, bingo equals the data")
                 t.sleep(1)
@@ -421,7 +421,7 @@ def shell(data,show):
     if show:
         print("Set the gap to half the length of the data")
         t.sleep(1)
-        print("repeate the next until the gap is 0 less than 0")
+        print("repeat the next until the gap is 0 less than 0")
         t.sleep(1)
     gap=len(data)//2
 
@@ -429,14 +429,14 @@ def shell(data,show):
         if show:
             print("Set the gap2 to gap")
             t.sleep(1)
-            print("repeate the next until gap2 is greater than the length of the data")
+            print("repeat the next until gap2 is greater than the length of the data")
             t.sleep(1)
         gap2=gap
         while gap2<len(data):
             if show:
                 print("Set the gap3 to gap2-gap")
                 t.sleep(1)
-                print("repeate the next until gap3 is less than or equal too 0")
+                print("repeat the next until gap3 is less than or equal too 0")
                 t.sleep(1)
             gap3=gap2-gap
             while gap3>=0:
@@ -477,13 +477,13 @@ def comb(data,show):
     if show:
         print(f"Set gap to the length of the data divided by 1.3 round down({gap})")
         t.sleep(1)
-        print("Then repeates the following until no swaps are made")
+        print("Then repeats the following until no swaps are made")
         t.sleep(1)
     done=False
     while not done:
         done=True
         if show:
-            print(f"Goes through and swaps data the are gap({gap}) appart if they are in the wrong order")
+            print(f"Goes through and swaps data the are gap({gap}) apart if they are in the wrong order")
             t.sleep(1)
         for i in range(len(data)):
             if i+int(gap)<len(data):
@@ -501,7 +501,7 @@ def comb(data,show):
                     data[i+int(gap)]=temp
                     done=False
         if show:
-            print("Divides the gap by 1.3 with a minumun of 1")
+            print("Divides the gap by 1.3 with a minimum of 1")
             t.sleep(1)
         if gap!=1:
             
@@ -540,7 +540,7 @@ def pigeonhole(data,show):
     if show:
         print("Makes a new list")
         t.sleep(1)
-        print("Then goes through the holes list and adds it to the new list as the corrosponding number")
+        print("Then goes through the holes list and adds it to the new list as the corresponding  number")
         t.sleep(1)
     newdata=[]
     for i in range(len(holes)):
@@ -606,9 +606,9 @@ def bitonic2(data,show,low,k,dire):
             print("goes through its designated half of the list and sorts")
             t.sleep(1)
             if dire==1:
-                print("assending")
+                print("ascending")
             else:
-                print("desending")
+                print("descending")
             t.sleep(1)
         for i in range(low,low+(k//2)):
             if show:
@@ -627,7 +627,7 @@ def bitonic2(data,show,low,k,dire):
                 data[i+(k//2)]=temp
                 
         if show:
-            print("Does the second functionon the lower half of the list")
+            print("Does the second function on the lower half of the list")
             t.sleep(1) 
         data=bitonic2(data,show,low,k//2,dire)
         if show:
@@ -658,26 +658,26 @@ def bitonic(data,show,low=0,k=False,dire=1):
     
     
     if show:
-        print("Checks if the lenght of the data is greater than one")
+        print("Checks if the length of the data is greater than one")
         t.sleep(1)
     if k>1:
         if show:
-            print("Runs the first function again, with the lenght being half of what this one sais it is")
+            print("Runs the first function again, with the length being half of what this one says it is")
             t.sleep(1)
-            print("Telling it to start on the lower half of the list and sort it assending")
+            print("Telling it to start on the lower half of the list and sort it ascending")
             t.sleep(1)
         data=bitonic(data,show,low,k//2,1)
         if show:
-            print("Then runs the first function on the second half of the list, telling it to sort desending")
+            print("Then runs the first function on the second half of the list, telling it to sort descending")
             t.sleep(1)
         data=bitonic(data,show,low+(k//2),k//2,0)
         if show:
-            print("Then it starts sorting the list, on what side it is either asending or desending")
+            print("Then it starts sorting the list, on what side it is either ascending or descending")
             t.sleep(1)
             if dire==1:
-                print("assending")
+                print("ascending")
             else:
-                print("desending")
+                print("descending")
             t.sleep(1)
         data=bitonic2(data,show,low,k,dire)
     elif show:
@@ -712,7 +712,7 @@ def fancynum(num):
 
 print("Bubble\nInsertion\nSelection\nQuick\nHeap\nMerge\nCounting\nRadix\nBingo\nShell\nComb\nPigeon Hole\nCocktail\nBitonic")
 sort=input("What sorting algorithm would you like to use?: ").lower()
-datatyp=input("Whould you like to enter your own data or use a randomly generated set?: ").lower()
+datatyp=input("Would you like to enter your own data or use a randomly generated set?: ").lower()
 if datatyp=="yes" or datatyp=="data" or datatyp=="enter data" or datatyp=="enter" or datatyp=="enterdata":
     done=False
     while not done:
