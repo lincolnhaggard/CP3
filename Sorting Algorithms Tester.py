@@ -18,7 +18,7 @@ O|Tim
 O|Cycle
 /|Cocktail
 O|Strand
-O|Bitonic
+/|Bitonic
 
 """
 #Functions
