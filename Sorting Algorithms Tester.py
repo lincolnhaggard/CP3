@@ -22,9 +22,11 @@ O|Strand
 
 """
 #Functions
-
+swap=0
+comp=0
 def bubble(data,show):
-    time=0
+    global comp
+    global swap
     #done is only complete when no swaps have been made
     done=False
     while not done:
@@ -38,10 +40,13 @@ def bubble(data,show):
                 t.sleep(1)
                 print(str(data[i])+">"+str(data[i+1])+"="+str(data[i]>data[i+1]))
                 t.sleep(1)
+            comp+=1
             if data[i]>data[i+1]:
                 if show:
                     print("Swapped "+str(data[i])+" and "+str(data[i+1]))
                     t.sleep(1)
+                
+                swap+=1
                 (data[i],data[i+1])=(data[i+1],data[i])
                 
                 done=False
@@ -49,8 +54,9 @@ def bubble(data,show):
 
 
 def insertion(data,show):
-    time=0
-    
+    global comp
+    global swap
+
     for i in range(1,len(data)):
         var=data[i]
         if show:
@@ -59,6 +65,7 @@ def insertion(data,show):
             t.sleep(1)
         k=i-1
         while k>=0 and data[k]>var:
+            comp+=1
             data[k+1]=data[k]
             k-=1
         data[k+1]=var
@@ -68,14 +75,15 @@ def insertion(data,show):
     return data
 
 def selection(data,show):
-    time=0
+    global comp
+    global swap
     newdata=[]
     if show:
         print(data)
     for i in range(len(data)):
         min=data[0]
         for k in range(len(data)):
-
+            comp+=1
             if data[k]<min:
                 min=data[k]
         if show:
@@ -90,6 +98,9 @@ def selection(data,show):
     return newdata
 
 def quick(data,show):
+    global comp
+    global swap
+    comp+=1
     if len(data)>1:
         time=0
         i=-1
@@ -104,11 +115,13 @@ def quick(data,show):
                 t.sleep(1)
                 print(f"Is {data[j]} less than"+f" {data[pivot]}")
                 t.sleep(1)
+            comp+=1
             if data[j]<data[pivot]:
                 if show:
                     print("Yes, Increment pointer 1 by 1 and swap")
                     t.sleep(1)
                 i+=1
+                swap+=1
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
@@ -119,6 +132,7 @@ def quick(data,show):
             if show:
                 print("Is pointer 2 at the pivot?")
                 t.sleep(1)
+            comp+=1
             if j==pivot:
                 i+=1
                 if show:
@@ -126,6 +140,7 @@ def quick(data,show):
                     t.sleep(1)
                     print("Swap the number at pointer 1 and the pivot")
                     t.sleep(1)
+                swap+=1
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
@@ -142,10 +157,13 @@ def quick(data,show):
 
 
 def heapify(data,n,i,show):
+    global comp
+    global swap
     largest=i
     if show:
         print(f"Checks the left and right to the root(index:{largest}) and then swaps if needed")
         t.sleep(1)
+      
         if 2*i+1<n:
             print("The left node exists")
             t.sleep(1)
@@ -158,6 +176,7 @@ def heapify(data,n,i,show):
         else:
             print("The left node does not exist")
             t.sleep(1)
+    comp+=1
     if 2*i+1<n and data[largest]<data[2*i+1]:
         largest=2*i+1
     if show:
@@ -173,6 +192,7 @@ def heapify(data,n,i,show):
         else:
             print("The right node does not exist")
             t.sleep(1)
+    comp+=1
     if 2*i+2<n and data[largest]<data[2*i+2]:
         largest=2*i+2
 
@@ -180,10 +200,12 @@ def heapify(data,n,i,show):
     if show:
         print("If the root is not the starting root, swap the root and the starting root, then heapify again")
         t.sleep(1)
+    comp+=1
     if largest!=i:
         if show:
             print("Swapped and heapifying")
             t.sleep(1)
+        swap+=1
         temp=data[i]
         data[i]=data[largest]
         data[largest]=temp
@@ -193,6 +215,8 @@ def heapify(data,n,i,show):
         heapify(data,n,largest,show) 
 
 def heap(data,show):
+    global comp
+    global swap
     if show:
         print("Builds a max heap")
         t.sleep(1)
@@ -203,6 +227,7 @@ def heap(data,show):
         print("Goes through from right to left and swaps the current value with the first value and then heapifies")
         t.sleep(1)
     for i in range(len(data)-1,0,-1):
+        swap+=1
         temp=data[i]
         data[i]=data[0]
         data[0]=temp
@@ -212,9 +237,12 @@ def heap(data,show):
 
 
 def merge(data,show):
+    global comp
+    global swap
     if show:
         print("Check if the data has a length greater than 1")
         t.sleep(1)
+    comp+=1
     if len(data)<=1:
         if show:
             print("The data is one item long return data")
@@ -237,8 +265,10 @@ def merge(data,show):
     newdata = []
     i = 0
     j = 0
-
+    comp+=1
     while i < len(left) and j < len(right):
+        comp+=1
+        comp+=1
         if left[i] < right[j]:
             newdata.append(left[i])
             i += 1
@@ -258,9 +288,12 @@ def merge(data,show):
     return newdata
 
 def counting(data,show):
+    global comp
+    global swap
     max=data[0]
     newdata=[0]*len(data)
     for k in range(len(data)):
+        comp+=1
         if data[k]>max:
             max=data[k]
     if show:
@@ -305,21 +338,27 @@ def counting(data,show):
             t.sleep(1)
             print(newdata)
             t.sleep(1)
+        swap+=1
         newdata[count[data[i]]-1]=data[i]
         count[data[i]]-=1
 
     return newdata
 
 def radix(data,show):
+    global comp
+    global swap
     max=data[0]
     for k in range(len(data)):
+        comp+=1
         if data[k]>max:
             max=data[k]
     if show:
         print("Find the max of the data")
         t.sleep(1)
     exp=1
+    comp+=1
     while max/exp>=1:
+        comp+=1
         if show:
             print("Preform counting sort for each digit of each part of the data")
             t.sleep(1)
@@ -357,7 +396,9 @@ def radix(data,show):
             t.sleep(1)
             print("then go through each item in the original list")
             t.sleep(1)
+        comp+=1
         while i>=0:
+            comp+=1
             if show:
                 print(f"Set the item in the final list to {(data[i]//exp)%10} "+f"At the slot corresponding to the 2nd list at the {(data[i]//exp)%10} slot")
                 t.sleep(1)
@@ -365,6 +406,7 @@ def radix(data,show):
                 t.sleep(1)
                 print(newdata)
                 t.sleep(1)
+            swap+=1
             newdata[count[(data[i]//exp)%10]-1]=data[i]
             count[(data[i]//exp)%10]-=1
             i-=1
@@ -375,12 +417,16 @@ def radix(data,show):
     return data
 
 def bingo(data,show):
+    global comp
+    global swap
     min=data[0]
     max=data[0]
     
     for k in range(len(data)):
+        comp+=1
         if data[k]>max:
             max=data[k]
+        comp+=1
         if data[k]<min:
             min=data[k]
     if show:
@@ -390,7 +436,9 @@ def bingo(data,show):
         t.sleep(1)
     bingo=max
     j=0
+    comp+=1
     while min<bingo:
+        comp+=1
         if show:
             print(f"While min<bingo go through the data starting at the j({j})'s place")
             t.sleep(1)
@@ -402,7 +450,9 @@ def bingo(data,show):
                 t.sleep(1)
                 print(f"data: {data[i]}",f"min: {min}",f"bingo: {bingo}")
                 t.sleep(1)
+            comp+=1
             if data[i]==min:
+                swap+=1
                 temp=data[i]
                 data[i]=data[j]
                 data[j]=temp
@@ -418,33 +468,41 @@ def bingo(data,show):
     return data
 
 def shell(data,show):
+    global comp
+    global swap
     if show:
         print("Set the gap to half the length of the data")
         t.sleep(1)
         print("repeat the next until the gap is 0 less than 0")
         t.sleep(1)
     gap=len(data)//2
-
+    comp+=1
     while gap>0:
+        comp+=1
         if show:
             print("Set the gap2 to gap")
             t.sleep(1)
             print("repeat the next until gap2 is greater than the length of the data")
             t.sleep(1)
         gap2=gap
+        comp+=1
         while gap2<len(data):
+            comp+=1
             if show:
                 print("Set the gap3 to gap2-gap")
                 t.sleep(1)
                 print("repeat the next until gap3 is less than or equal too 0")
                 t.sleep(1)
             gap3=gap2-gap
+            comp+=1
             while gap3>=0:
+                comp+=1
                 if show:
                     print(f"if the data at the gap3+gap({gap3+gap}) slot"+f" is greater than the data at gap3({gap3}) slot, stop repeating")
                     t.sleep(1)
                     print("Otherwise swap them")
                     t.sleep(1)
+                comp+=1
                 if data[gap3+gap]>data[gap3]:
                     if show:
                         print("stopped repeating")
@@ -454,6 +512,7 @@ def shell(data,show):
                     if show:
                         print("Swapped")
                         t.sleep(1)
+                    swap+=1
                     temp=data[gap3+gap]
                     data[gap3+gap]=data[gap3]
                     data[gap3]=temp
@@ -473,6 +532,8 @@ def shell(data,show):
 
 
 def comb(data,show):
+    global comp
+    global swap
     gap=len(data)//1.3
     if show:
         print(f"Set gap to the length of the data divided by 1.3 round down({gap})")
@@ -480,22 +541,27 @@ def comb(data,show):
         print("Then repeats the following until no swaps are made")
         t.sleep(1)
     done=False
+    comp+=1
     while not done:
+        comp+=1
         done=True
         if show:
             print(f"Goes through and swaps data the are gap({gap}) apart if they are in the wrong order")
             t.sleep(1)
         for i in range(len(data)):
+            comp+=1
             if i+int(gap)<len(data):
                 if show:
                     print(data)
                     t.sleep(1)
                     print(f"Checks {data[i]}"+f" and {data[i+int(gap)]}")
                     t.sleep(1)
+                comp+=1
                 if data[i]>data[i+int(gap)]:
                     if show:
                         print("Swapped")
                         t.sleep(1)
+                    swap+=1
                     temp=data[i]
                     data[i]=data[i+int(gap)]
                     data[i+int(gap)]=temp
@@ -503,6 +569,7 @@ def comb(data,show):
         if show:
             print("Divides the gap by 1.3 with a minimum of 1")
             t.sleep(1)
+        comp+=1
         if gap!=1:
             
             gap=gap//1.3
@@ -514,12 +581,16 @@ def comb(data,show):
     return data
 
 def pigeonhole(data,show):
+    global comp
+    global swap
     min=data[0]
     max=data[0]
     
     for k in range(len(data)):
+        comp+=1
         if data[k]>max:
             max=data[k]
+        comp+=1
         if data[k]<min:
             min=data[k]
     if show:
@@ -554,10 +625,14 @@ def pigeonhole(data,show):
     return newdata
 
 def cocktail(data,show):
+    global comp
+    global swap
     done=False
     top=len(data)-1
     bottom=0
+    comp+=1
     while not done:
+        comp+=1
         done=True
         if show:
             print("Goes from the bottom of the data to the top swapping adjacent if they are in the wrong order")
@@ -568,12 +643,14 @@ def cocktail(data,show):
                 t.sleep(1)
                 print(f"Compare {data[i]}"+f" and {data[i+1]}")
                 t.sleep(1)
+            comp+=1
             if data[i]>data[i+1]:
                 if show:
                     print("Swapped")
                     t.sleep(1)
                     print(f"Set the upper limit to {i}")
                     t.sleep(1)
+                swap+=1
                 (data[i],data[i+1])=(data[i+1],data[i])
                 done=False
                 top=i
@@ -586,21 +663,26 @@ def cocktail(data,show):
                 t.sleep(1)
                 print(f"Compare {data[i]}"+f" and {data[i-1]}")
                 t.sleep(1)
+            comp+=1
             if data[i]<data[i-1]:
                 if show:
                     print("Swapped")
                     t.sleep(1)
                     print(f"Set the lower limit to {i}")
                     t.sleep(1)
+                swap+=1
                 (data[i],data[i-1])=(data[i-1],data[i])
                 done=False
                 bottom=i
     return data
 
 def bitonic2(data,show,low,k,dire):
+    global comp
+    global swap
     if show:
         print("Checks if the length of the list is one")
         t.sleep(1)
+    comp+=1
     if k>1:
         if show:
             print("goes through its designated half of the list and sorts")
@@ -616,12 +698,14 @@ def bitonic2(data,show,low,k,dire):
                 t.sleep(1)
                 print(f"Checks {data[i]} "+f"and {data[i+(k//2)]}")
                 t.sleep(1)
+            comp+=1
             if (dire==1 and data[i]>data[i+(k//2)]) or (dire==0 and data[i]<data[i+(k//2)]):
                 if show:
                     print("Swapped")
                     t.sleep(1)
                     print(data)
                     t.sleep(1)
+                swap+=1
                 temp=data[i]
                 data[i]=data[i+(k//2)]
                 data[i+(k//2)]=temp
@@ -640,18 +724,24 @@ def bitonic2(data,show,low,k,dire):
     return data
 
 def bitonic(data,show,low=0,k=False,dire=1):
+    global comp
+    global swap
     length=2
     if show:
         print("Adds filler to make the length of the list a power of two")
         t.sleep(1)
+    comp+=1
     while length<len(data):
+        comp+=1
         length*=2
+    comp+=1
     if length-len(data)>0:
         final=True
         len0=length-len(data)
     else:
         final=False
     data=data+([0]*(length-len(data)))
+    comp+=1
     if k==False:
         k=len(data)
     
@@ -660,6 +750,7 @@ def bitonic(data,show,low=0,k=False,dire=1):
     if show:
         print("Checks if the length of the data is greater than one")
         t.sleep(1)
+    comp+=1
     if k>1:
         if show:
             print("Runs the first function again, with the length being half of what this one says it is")
@@ -686,7 +777,7 @@ def bitonic(data,show,low=0,k=False,dire=1):
     if show:
         print("returning the data")
         t.sleep(1)
-
+    comp+=1
     if final:
         if show:
             print("Removes filler")
@@ -834,6 +925,8 @@ else:
 if output!=False:
     print(output)
     print(f"Time: {round((time2-time1)*1000,4)} milliseconds")
+    print(f"Comparisons: {comp}")
+    print(f"Swaps {swap}")
 else:
     print("Sorting algorithmn not reconized")
 
