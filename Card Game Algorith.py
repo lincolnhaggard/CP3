@@ -1,43 +1,83 @@
 import random
 from math import *
-class card:
-    def __init__(self,typ,num,tnum):
-        self.typ=typ
-        self.num=num
-        self.tnum=tnum
-    def __repr__(self):
-        return self.num+" of "+self.typ
+import copy
+import time
 
-deck=[]
-for i in ["Club","Spade","Heart","Diamond"]:
-    for x,k in enumerate(["Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"]):
-        deck.append(card(i,k,x))
-shuffled_deck=[]
-while len(deck)>0:
-    shuffled_deck.append(random.choice(deck))
-    deck.remove(shuffled_deck[-1])
-deck=shuffled_deck
+
+
 class player:
-    def __init__(self):
-        self.hand=[]
-        for i in range(5):
-            self.hand.append(deck[-1])
-            deck.remove(self.hand[-1])
-players=[player(),player(),player(),player()]
-board=[[],[],[],[],[],[],[],[]]
+    def __init__(self,num=False):
+        if num==False:
+            self.num=[1]*1000
+        else:
+            self.num=[]
+            for i in num:
+                self.num.append((random.randint(-10,10)/10)+i)
+        self.cm=3
+    def startfight(self):
+        if self.num[-1]>1:
+            self.a=3
+            if self.num[-2]>0:
+                self.h=2
+                self.m=1
+            else:
+                self.m=2
+                self.h=1
+        elif self.num[-2]>1:
+            self.h=3
+            if self.num[-1]>0:
+                self.a=2
+                self.m=1
+            else:
+                self.m=2
+                self.a=1
+        else:
+            self.m=3
+            if self.num[-1]>0:
+                self.a=2
+                self.h=1
+            else:
+                self.a=1
+                self.h=2
+        self.ch=self.h*4
+    def attack(self,oh,om):
+        self.cm+=self.m
+        self.choice=[1,1,1,1]
+        count=0
+        for i in range(4):
+            self.choice+=oh*self.num[count]
+            count+=1
+        for i in range(4):
+            self.choice+=om*self.num[count]
+            count+=1
+        for i in range(4):
+            self.choice+=self.ch*self.num[count]
+            count+=1
+        for i in range(4):
+            self.choice+=self.cm*self.num[count]
+            count+=1
+        max=0
+        for i in range(len(self.choice)):
+            if self.choice[i]>self.choice[max] and (i==1 or ((i==2 and self.cm>=1) or (i==3 and self.cm>=3) ir (i==3 and self.cm>=3))):
+                max=i
+        
+        
+        
 
+    
+        
+            
+    
+        
 
+p=[]
+for i in range(100):
+    p.append(player)
+#print(p.guess())
 
 end=False
 turn=0
-while not end:
-
-
-
-
-    turn+=1
-    if turn==4:
-        turn=0
-    for i in players:
-        if len(i.hand)==0:
-            end=True
+count=0
+while True:
+    for i in player:
+        pass
