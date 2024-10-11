@@ -9,36 +9,40 @@ menu={
 
 
 class Ordor:
-    def __init__(self):
-        self.items=[]
-        self.special=False
-        for i in menu.keys():
-            if i!="Second Side" or self.items[-1] in menu["Side"]:
-                inp=input(f"\nWould you like a {i}: \n").lower()
-                if inp=="yes":
-                    print()
-                    for k in menu[i].keys():
-                        print(f"{k}:{menu[i][k]}",end=", ")
-                    print("\n")
-                    inp=input(f"What would you like: \n").lower().capitalize()
-                    while not inp in menu[i].keys():
-                        print("\nthat item is not available\n")
-                        inp=input(f"\nWould you like a {i}: \n").lower()
-                        if inp=="yes":
-                            for k in menu[i].keys():
-                                print(f"{k}:{menu[i][k]}",end=", ")
-                            print("\n")
-                            inp=input("What woud you like: \n").lower().capitalize()
-                        else:
-                            inp=""
-                            break
-                    self.items.append(inp)
-                    done=True
-                elif i=="Side":
-                    self.items.append("")
-                    self.items.append("")
-                else:
-                    self.items.append("")
+    def __init__(self,special=False):
+        if not special:
+            self.items=[]
+            self.special=False
+            for i in menu.keys():
+                if i!="Second Side" or self.items[-1] in menu["Side"]:
+                    inp=input(f"\nWould you like a {i}: \n").lower()
+                    if inp=="yes":
+                        print()
+                        for k in menu[i].keys():
+                            print(f"{k}:{menu[i][k]}",end=", ")
+                        print("\n")
+                        inp=input(f"What would you like: \n").lower().capitalize()
+                        while not inp in menu[i].keys():
+                            print("\nthat item is not available\n")
+                            inp=input(f"\nWould you like a {i}: \n").lower()
+                            if inp=="yes":
+                                for k in menu[i].keys():
+                                    print(f"{k}:{menu[i][k]}",end=", ")
+                                print("\n")
+                                inp=input("What woud you like: \n").lower().capitalize()
+                            else:
+                                inp=""
+                                break
+                        self.items.append(inp)
+                        done=True
+                    elif i=="Side":
+                        self.items.append("")
+                        self.items.append("")
+                    else:
+                        self.items.append("")
+        else:
+            self.items=Ordor.specials(self)
+            self.special=True
     def __str__(self):
         toret=""
         menukeys=[]
@@ -51,41 +55,44 @@ class Ordor:
         return toret
     
     def changeitem(self,item):
+        print(item)
         for x,i in enumerate(menu.keys()):
             
             if item==i:
                 for k in menu[i].keys():
                     print(f"{k}:{menu[i][k]}",end=", ")
-                print()
+                print("None")
                 inp=input(f"What would you like to change your item to: \n").lower().capitalize()
-                while not inp in menu[i].keys():
+                while not (inp in menu[i].keys() or inp=="None"):
                     print("That item is not available\n")
                     for k in menu[i].keys():
                         print(f"{k}:{menu[i][k]}",end=", ")
-                    print()
+                    print("None")
                     inp=input(f"What would you like to change your item to: \n")
-                self.items[x]=inp
+                if inp=="None":
+                    self.items[x]=""
+                else:
+                    self.items[x]=inp
                 break
         self.special=False
+    
+    @classmethod
     def checkordor(self):
         self.items.remove("")
         if len(self.items)>0:
             return True
         else:
             return False
-    @classmethod
     def specials(self):
         print("\nGreen Coke, Double spoon, prime bib\n")
         inp=input("What special would you like: \n").lower()
         if inp=="green coke":
             self.items=["Coke","Green","","","",""]
-            self.special=True
         elif inp=="double spoon":
             self.items=["","","","Spoon","Spoon",""]
-            self.special=True
         elif inp=="prime bib":
             self.items=["Bebsi","Red","Bime prib","","","Crab"]
-            self.special=True
+        return self.items
     @staticmethod
     def price(items,special):
         total=0.0
@@ -115,7 +122,10 @@ print(o.checkordor())
 inp=input("Would you like to place an ordor?: \n").lower()
 ordors=[]
 while inp=="yes":
-    ordors.append(Ordor())
+    if input("Would you like a special?: \n").lower()=="yes":
+        ordors.append(Ordor(True))
+    else:
+        ordors.append(Ordor())
     done=False
     while not done:
         print("1.View ordors\n2.Edit Ordor\n3.Place new ordor")
@@ -125,7 +135,7 @@ while inp=="yes":
         elif inp=="2":
             print(Ordor.viewordorlist(ordors))
             inp=int(input("Wich ordor would you like to edit: \n"))
-            ordors[inp-1].changeitem(input(f"What item would you like to change?: \nDrink, Appetizer, Main Course, Side, Second Side, Desert\n").lower().capitalize())
+            ordors[inp-1].changeitem(input(f"What item would you like to change?: \nDrink, Appetizer, Main Course, Side, Second Side, Dessert\n").lower().capitalize())
         elif inp=="3":
-            break
+            done=True
 print("ok bye")
