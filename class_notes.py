@@ -7,12 +7,15 @@ we start classes with keyword class and we name them usinc PascalCase
 class Animal:
     #We start with constructor(defines the attributes)
     def __init__(self,name,species,age,gender,rarity):
-        self.name=name
+        self.name = name
         self.species=species
         self.age=age
         self.gender=gender
         self.rarity=rarity
         self.losses=0
+
+    def get_name(self):
+        return self.name
 
     #Methods are functions inside of the class
     def fight(self,other):
