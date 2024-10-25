@@ -2,7 +2,8 @@ from desert_shop import (
     Candy,
     Cookie,
     IceCream,
-    Sundae
+    Sundae,
+    Order
 )
 
 def test_candy():
@@ -30,3 +31,10 @@ def test_sundae():
     assert test_Sundae.price_per_scoop==11.99
     assert test_Sundae.topping_name=="Orange Flavoured Chocolate"
     assert test_Sundae.topping_price==2.99
+
+def test_ordor():
+    test_Ordor=Order()
+    test_Ordor.add(Candy("Pepermint Candy",10.0,6.25))
+    assert test_Ordor.ordor[0].name=="Pepermint Candy"
+    test_Ordor.add("Squigles")
+    assert len(test_Ordor)==1
