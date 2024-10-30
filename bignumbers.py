@@ -6,61 +6,36 @@ class BigNum:
         self.num=[num]
         self.simplify()
     def __str__(self):
-        numends={
-            (0,3):"",
-            (4,6):"K",
-            (7,9):"M",
-            (10,12):"B",
-            (13,15):"T",
-            (16,18):"Qa",
-            (19,21):"Qi",
-            (22,24):"S",
-            (25,27):"Sp",
-            (28,30):"O",
-            (31,33):"N",
-            (34,36):"De",
-            (37,39):"UDe",
-            (40,42):"DDe",
-            (43,45):"TDe",
-            (46,48):"QaDe",
-            (49,51):"QiDe",
-            (52,54):"SDe",
-            (55,57):"SpDe",
-            (58,60):"OcDe",
-            (61,63):"NDe",
-            (64,66):"Vi",
-            (67,69):"UnVi",
-            (70,72):"DVi",
-            (73,75):"TVi",
-            (76,78):"QaVi",
-            (79,81):"QiVi",
-            (82,84):"SVi",
-            (85,87):"SpVi",
-            (88,90):"OVi",
-            (91,93):"NVi",
-            (94,96):"Tr",
-            (97,99):"UTr",
-            (100,102):"DTr",
-            (103,105):"TTr",
-            (106,108):"QaTr",
-            (109,111):"QiTr",
-            (112,114):"STr",
-            (115,117):"SpTr",
-            (118,120):"OTr",
-            (121,123):"NTr",
-            (124,126):"Qua",
-            (127,129):"UQua",
-            (130,132):"DQua",
-            (133,135):"TQua",
-            (136,138):"QaQua",
-            (139,141):"QiQua",
-            (142,144):"SQua",
-            (145,147):"SpQua",
-            (148,150):"OQua",
-            (151,153):"NQua",
-            (154,156):"Qui"#Sx,Se,Oi,Ni
-        }
-        return str(self.num)
+        numends=[
+            "","K","M","B","T","Qa","Qi","S","Sp","Oc","N","De"
+            ]
+        numendsends=[
+            "De","Vi","Ti","Qai","Qii","Si","Spi","Oi","Ni"
+        ]
+        numendspres=[
+            "","U","D","T","Qa","Qi","S","Sp","O","N"
+        ]
+        toret=""
+        toret+=str(self.num[0])
+        if (len(self.num)%3==2 or len(self.num)%3==0) and len(self.num)>1:
+            toret+=str(self.num[1])
+            if len(self.num)%3!=0:
+                toret+="."
+        elif len(self.num)>1:
+            toret+="."
+            toret+=str(self.num[1])
+        
+        if len(self.num)>2:
+            toret+=str(self.num[2])
+        numbersuffix=math.floor((len(self.num)+2)/3)-1
+        if numbersuffix<len(numends):
+            toret+=numends[numbersuffix]
+        else:
+            
+            toret+=numendspres[numbersuffix%10-1]
+            toret+=numendsends[math.floor((numbersuffix-1)/10)-1]
+            print(numbersuffix)
+        return toret
     def __add__(self,other):
         if isinstance(other,BigNum):
             newnum=BigNum()
@@ -97,5 +72,6 @@ class BigNum:
                 
 
 money=BigNum(934851245)
-dollars =BigNum(453098)
+dollars =BigNum(1234567890123456789012345678901)
 print(money+dollars)
+print(dollars)
