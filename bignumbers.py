@@ -49,6 +49,16 @@ class BigNum:
                 newnum.num[-i]+=self.num[-i]
         newnum.simplify()
         return newnum
+    def __mul__(self,other):
+        if isinstance(other,BigNum):
+            newnum=BigNum()
+            newnum.num=[0]*(len(other.num)+len(self.num))
+            for x,i in enumerate(self.num):
+                for y,k in enumerate(other.num):
+                    #print(abs(x-(len(self.num)-1)),abs(y-(len(other.num)-1)),i,k)
+                    newnum.num[-((abs(x-(len(self.num)-1))+abs(y-(len(other.num)))))]+=i*k
+            newnum.simplify()
+            return newnum
     def simplify(self):
         done=False
         while not done:
@@ -68,10 +78,12 @@ class BigNum:
                     else:
                         self.num[-(i+1)]+=10**(biggestdigit-1)
                     break
+        while self.num[0]==0 and len(self.num)>1:
+            self.num.pop(0)
                 
                 
 
-money=BigNum(934851245)
-dollars =BigNum(1234567890123456789012345678901)
-print(money+dollars)
+money=BigNum(14765)
+dollars =BigNum(1245674)
+print(money*dollars)
 print(dollars)
