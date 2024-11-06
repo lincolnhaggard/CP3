@@ -8,15 +8,15 @@ class Board:
                     ["N","N","N"]]
     
     def __str__(self):
-        toret=" 1 2 3\n"
+        toret="  1 2 3\n"
         for x,i in enumerate(self.board):
-            toret+=str(x)
+            toret+=str(x+1)
             for k in i:
                 toret+="|"
                 if k=="N":
                     toret+=" "
                 else:
-                    toret+=k
+                    toret+="X"
 
             toret+="|\n"
 
@@ -36,7 +36,29 @@ class Board:
         return "N"
     
     def makemove(self,turn,pos1,pos2):
-        pass
+        if pos1<=2 and pos1>=0 and pos2<=2 and pos2>=0 and self.board[pos1][pos2]=="N":
+            self.board[pos1][pos2]=turn
+        else:
+            return "N"
+        
     
 board=Board()
-print(board)
+while board.checkwin()=="N":
+    print(board)
+    
+    try:
+        pos2=int(input("Enter the x position: "))-1
+        pos1=int(input("Enter the y posiiton: "))-1
+    except:
+        pos2=1000
+        pos1=1000
+    while board.makemove("X",pos1,pos2)=="N":
+        print("That space is invalid")
+        try:
+            pos2=int(input("Enter the x position: "))-1
+            pos1=int(input("Enter the y posiiton: "))-1
+        except:
+            pos2=1000
+            pos1=1000
+    
+        
