@@ -5,9 +5,8 @@ class Dog:
 
 dogs=[
     Dog("Marceline","German Shepherd"),
-2	Cajun	Belgian Malinois
-3	Daisy	Border Collie
-4	Rocky	Golden Retriever
-5	Bella	Irish Setter)
-
+	Dog("Cajun","Belgian Malinois"),
+	Dog("Daisy","Border Collie"),
+	Dog("Rocky","Golden Retriever"),
+	Dog("Bella","Irish Setter"),
 ]
