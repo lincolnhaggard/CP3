@@ -1,4 +1,5 @@
 import time
+from robot import choosemove
 
 class Game:
     def __init__(self):
@@ -53,9 +54,11 @@ class Game:
                         return turn
 
 board=Game()
+
 while board.checkwin()==None:
     print(board)
     colum=int(input("Pick a colum: "))-1
     board.makemove("R",colum)
+    print(choosemove(board.board,"Y"))
 print(board)
 print(board.checkwin())
