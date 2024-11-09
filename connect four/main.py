@@ -1,5 +1,6 @@
 import time
 from robot import choosemove
+from colorama import Back
 
 class Game:
     def __init__(self):
@@ -17,8 +18,10 @@ class Game:
             for k in i:
                 if k=="N":
                     toret+=" "
-                else:
-                    toret+=k
+                elif k=="R":
+                    toret+=Back.RED+"R"+Back.RESET
+                elif k=="Y":
+                    toret+=Back.YELLOW+"Y"+Back.RESET
                 toret+="||"
             toret+="\n"
         toret+="  1  2  3  4  5  6  7"
@@ -46,8 +49,8 @@ class Game:
                 for k in range(3):
                     if self.board[k][i]==turn and self.board[k+1][i]==turn and self.board[k+2][i]==turn and self.board[k+3][i]==turn:
                         return turn
-            for i in range(4):
-                for k in range(3):
+            for i in range(3):
+                for k in range(4):
                     if self.board[i][k]==turn and self.board[i+1][k+1]==turn and self.board[i+2][k+2]==turn and self.board[i+3][k+3]==turn:
                         return turn
                     if self.board[-i][k]==turn and self.board[-(i+1)][k+1]==turn and self.board[-(i+2)][k+2]==turn and self.board[-(i+3)][k+3]==turn:
@@ -59,6 +62,6 @@ while board.checkwin()==None:
     print(board)
     colum=int(input("Pick a colum: "))-1
     board.makemove("R",colum)
-    print(choosemove(board.board,"Y"))
+    board.makemove("Y",choosemove(board.board,"Y"))
 print(board)
 print(board.checkwin())
