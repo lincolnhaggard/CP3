@@ -66,9 +66,19 @@ def evaluateboard(board,turn):
 
 def choosemove(board,turn):
     
-    depth=6
+    depth=7
     vals=choosemove2(board,turn,depth,turn)
-    return vals.index(max(vals))
+    max=False
+    maxchoice=0
+    for x,k in enumerate(vals):
+        done=True
+        for i in board:
+            if i[x]=="N":
+                done=False
+        if (max==False or k>max) and done==False:
+            max=k
+            maxchoice=x
+    return maxchoice
         
 
 def choosemove2(board,turn,depth,trueturn,count=0):

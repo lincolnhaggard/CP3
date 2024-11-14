@@ -1,4 +1,4 @@
-from desert_shop import (
+from desset_shop.desserts import (
     Candy,
     Cookie,
     IceCream,

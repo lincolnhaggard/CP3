@@ -59,6 +59,9 @@ class Game:
 board=Game()
 
 while board.checkwin()==None:
+    
+    
+    #board.makemove("R",choosemove(board.board,"R"))
     print(board)
     colum=int(input("Pick a colum: "))-1
     board.makemove("R",colum)
