@@ -1,4 +1,4 @@
-from desset_shop.desserts import (
+from desserts import (
     Candy,
     Cookie,
     IceCream,
@@ -38,3 +38,8 @@ def test_ordor():
     assert test_Ordor.ordor[0].name=="Pepermint Candy"
     test_Ordor.add("Squigles")
     assert len(test_Ordor)==1
+
+def test_tax_percent():
+    test_candy=Candy("Purple and black gumdrops",100.5,0.25)
+    assert test_candy.tax_percent==7.25
+
