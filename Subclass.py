@@ -58,9 +58,10 @@ class Animal:
     
     def __str__(self):
         return f"This is {self.name}"
-    
     def eat(self):
         print(self.name, "is eating", self.diet)
+    def __lt__(self, other):
+        return self.name<other.name
 
 class Mammal(Animal):
     pass
@@ -109,13 +110,19 @@ class Koi(Fish):
 
 class Guppy(Fish):
     diet = "flakes"
-
+print(dir(Turtle))
 store = PetStore(1)
-store.add_pet(Turtle("Shelly"))
-store.add_pet(Cat("Joe"))
-store.add_pet(Turtle("Flash"))
-store.add_pet(Snake("Robin"))
-
+shelly = Turtle("Shelly")
+flash = Turtle("Flash")
+robin = Snake("Robin")
+pets = [shelly,flash,robin]
+store.add_pet(shelly)
+store.add_pet(Cat("Joe",'gun'))
+store.add_pet(flash)
+store.add_pet(robin)
+pets.sort()
+for pet in pets:
+    print(pet)
 store.feature("Flash")
 store.feed()
 
