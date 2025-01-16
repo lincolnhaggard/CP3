@@ -39,12 +39,9 @@ class BigNum:
         if isinstance(num,BigNum):
             newnum=BigNum(int(self.num)*int(num.num))
             newnum.digits=self.digits+num.digits-1
-            #if len(str(int(self.num)*int(num.num)))>len(self.num):
-            #    newnum.digits+=1
-            #if len(str(int(self.num)*int(num.num)))>len(num.num):
-            #    newnum.digits+=1
-            #if newnum.digits==0:
-            #    newnum.digits=1
+            if len(str(int(self.num)*int(num.num)))>len(self.num)+len(num.num)-1:
+                newnum.digits+=1
+            
             return newnum
     def __str__(self):
         toret=""
