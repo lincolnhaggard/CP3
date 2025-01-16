@@ -78,11 +78,13 @@ class BigNum:
         if isinstance(num,int):
             num=BigNum(num)
         if isinstance(num,BigNum):
-            if self.digits>num.digits+5:
+            if self.digits>=num.digits+5:
                 return self
-            if self.digits+5<num.digits:
+            if self.digits+5<=num.digits:
                 return self
-            if self.digits>num.digits:
+            if num.digits<5 or self.digits<5:
+                newnum=BigNum(int(int(self.num)+(int(num.num))))
+            elif self.digits>num.digits:
                 newnum=BigNum(int(int(self.num)+(int(num.num)/(self.digits-num.digits))))
                 newnum.digits=self.digits
                 if len(str(int(int(self.num)+(int(num.num)/(self.digits-num.digits)))))>len(self.num):
@@ -103,11 +105,14 @@ class BigNum:
         if isinstance(num,int):
             num=BigNum(num)
         if isinstance(num,BigNum):
-            if self.digits>num.digits+5:
+            #print(self.digits,num.digits)
+            if self.digits>=num.digits+5:
                 return self
-            if self.digits+5<num.digits:
+            if self.digits+5<=num.digits:
                 return self
-            if self.digits>num.digits:
+            if num.digits<5 or self.digits<5:
+                newnum=BigNum(int(int(self.num)-(int(num.num))))
+            elif self.digits>num.digits:
                 newnum=BigNum(int(int(self.num)-(int(num.num)/(self.digits-num.digits))))
                 newnum.digits=self.digits
                 if len(str(int(int(self.num)-(int(num.num)/(self.digits-num.digits)))))<len(self.num):
@@ -129,11 +134,18 @@ class BigNum:
             num=BigNum(num)
         if isinstance(num,BigNum):
             newnum=BigNum(int(self.num)*int(num.num))
-            newnum.digits=self.digits+num.digits-1
+            newnum.digits=(self.digits+num.digits)
+            newnum.digits-=1
+            print(self.digits,num.digits,self.digits+num.digits,newnum.digits)
             if len(str(int(self.num)*int(num.num)))>len(self.num)+len(num.num)-1:
                 newnum.digits+=1
             newnum.check()
             return newnum
+    def __pow__(self,num):
+        if isinstance(num,int):
+            num=BigNum(num)
+        if isinstance(num,BigNum):
+            pass
     def __str__(self):
         toret=""
         if self.digits<=3:
@@ -158,17 +170,17 @@ class BigNum:
         return f"Num: {self.num}, Digits: {self.digits}"
 
 
-money=BigNum(1000000)
-money.digits=1000
+money=BigNum(100000)
+#money.digits=1000
 money.check()
 print(money)
 print(money.__repr__())
-money*=100
+money-=1
 print(money)
 print(money.__repr__())
-#for i in range(1000):
-#    money*=10
-#    os.system("clear")
-#    print(money)
-#    print(money.__repr__())
-#    time.sleep(0.1)
+for i in range(150):
+    money=money**4
+    os.system("clear")
+    print(money)
+    print(money.__repr__())
+    time.sleep(0.1)
