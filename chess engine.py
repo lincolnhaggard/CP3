@@ -332,10 +332,16 @@ def score(board,turn):
                 try:
                     if square[0]==turn:
                         points+=values[square[1]]
-                        points+=posco[square[1]][x][y]
+                        if square[1]=="P":
+                            points+=posco[square[1]][turn][x][y]
+                        else:
+                            points+=posco[square[1]][x][y]
                     else:
                         points-=values[square[1]]
-                        points-=posco[square[1]][x][y]
+                        if square[1]=="P":
+                            points-=posco[square[1]][turn][x][y]
+                        else:
+                            points-=posco[square[1]][x][y]
                     
                 except:
                     print(square)
