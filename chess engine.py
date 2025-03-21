@@ -33,9 +33,9 @@ def print_board(board):
             
             if square!="":
                 if square[0]=="B":
-                    toret+=f"\x1B[38;2;{0};{0};{0}m"
+                    toret+=f"\x1B[38;2;{255};{0};{0}m"
                 else:
-                    toret+=f"\x1B[38;2;{255};{255};{255}m"
+                    toret+=f"\x1B[38;2;{0};{0};{255}m"
                 try:
                     toret+=conversion[square[1]]
                 except:
@@ -263,7 +263,7 @@ def legal_moves(board,turn,check=True):
                         
     return moves
 
-def score(board,turn):
+def score(board,turn,aturn):
     points=0
     values={"P":100,"K":500,"R":1500,"B":1000,"Q":3000,"C":100000000000}
     posco={"P":{"B":[[0]*8,
@@ -333,13 +333,13 @@ def score(board,turn):
                     if square[0]==turn:
                         points+=values[square[1]]
                         if square[1]=="P":
-                            points+=posco[square[1]][turn][x][y]
+                            points+=posco[square[1]][aturn][x][y]
                         else:
                             points+=posco[square[1]][x][y]
                     else:
                         points-=values[square[1]]
                         if square[1]=="P":
-                            points-=posco[square[1]][turn][x][y]
+                            points-=posco[square[1]][aturn][x][y]
                         else:
                             points-=posco[square[1]][x][y]
                     
@@ -369,18 +369,21 @@ def tree(board,turn,trueturn,depth=0):
             else:
                 return -100000000000
     else:
-        return score(board,trueturn)
+        return score(board,trueturn,turn)
 
 while True:
-    print(print_board(board))
-    move=input("\n\nmove: ")
-    if move in legal_moves(board,turn):
-        board=push_board(board,move)
-        if turn=="W":turn="B"
-        else:turn="W"
-    else:
-        print("illegal move")
-        print(legal_moves(board,turn))
+    while True:
+        print(print_board(board))
+        move=input("\n\nmove: ")
+        if move in legal_moves(board,turn):
+            board=push_board(board,move)
+            if turn=="W":turn="B"
+            else:turn="W"
+            break
+        else:
+            print("illegal move")
+            print(legal_moves(board,turn))
+            continue
     print(print_board(board))
     print("thinking...")
     tim=time.time()
