@@ -191,7 +191,7 @@ def legal_moves(board,turn,check=True):
                                             moves.append(f"{x}{y}{nextsquare[0]}{nextsquare[1]}")
                                     else:
                                         moves.append(f"{x}{y}{nextsquare[0]}{nextsquare[1]}")
-                                    if dire[3]==x:
+                                    if dire[3]==x and board[nextsquare[0]+dire[4]][nextsquare[1]]=="":
                                         if check:
                                             if g_check(board,turn,f"{x}{y}{nextsquare[0]+dire[4]}{nextsquare[1]}"):   
                                                 moves.append(f"{x}{y}{nextsquare[0]+dire[4]}{nextsquare[1]}")
@@ -266,22 +266,22 @@ def legal_moves(board,turn,check=True):
 def score(board,turn):
     points=0
     values={"P":100,"K":500,"R":1500,"B":1000,"Q":3000,"C":100000000000}
-    posco={"P":{"W":[[50]*8,
-                     [40]*8,
-                     [30]*8,
+    posco={"P":{"B":[[0]*8,
+                     [2500]*8,
+                     [1000]*8,
+                     [100]*8,
+                     [50]*8,
                      [20]*8,
-                     [15]*8,
-                     [5]*8,
                      [0]*8,
                      [0]*8],
-                "B":[[0]*8,
+                "W":[[0]*8,
                      [0]*8,
-                     [5]*8,
-                     [10]*8,
                      [20]*8,
-                     [30]*8,
-                     [40]*8,
-                     [50]*8],     },
+                     [50]*8,
+                     [100]*8,
+                     [1000]*8,
+                     [2500]*8,
+                     [0]*8],     },
             "K":[[15,10,5 ,5 ,5 ,5 ,5 ,15],
                  [10,0 ,0 ,0 ,0 ,0 ,0 ,10],
                  [5 ,0 ,25,25,25,25,0 ,5 ],
@@ -355,7 +355,7 @@ def tree(board,turn,trueturn,depth=0):
             poses[move]=newposes
         if turn!=trueturn:
             if len(list(poses.values()))>0:
-                return max(list(poses.values()))
+                return min(list(poses.values()))
             else:
                 return -100000000000
         else:
@@ -365,7 +365,7 @@ def tree(board,turn,trueturn,depth=0):
                     if poses[i]==ma:
                         return i
             if len(list(poses.values()))>0:
-                return min(list(poses.values()))
+                return max(list(poses.values()))
             else:
                 return -100000000000
     else:
